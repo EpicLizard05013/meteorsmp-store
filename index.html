@@ -34,6 +34,7 @@
             flex: 1;
             width: 100%;
             box-sizing: border-box;
+            padding-bottom: 100px;
         }
         header {
             text-align: center;
@@ -150,6 +151,12 @@
             line-height: 1.8;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4ade80;
+            margin: 10px 0;
+        }
         .btn {
             background: linear-gradient(145deg, rgba(39, 39, 42, 0.9), rgba(24, 24, 27, 0.9));
             color: #a1a1aa;
@@ -159,7 +166,7 @@
             font-weight: bold;
             cursor: not-allowed;
             text-align: center;
-            margin-top: 25px;
+            margin-top: 15px;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -182,28 +189,33 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
             letter-spacing: 1px;
         }
-        .site-footer {
-            width: 100%;
-            background-color: #111111;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 2px solid #222;
-            margin-top: auto;
-            z-index: 10;
+        
+        /* Floating Cart Bar */
+        .cart-bar {
+            position: fixed;
+            bottom: 25px;
+            background: rgba(24, 24, 27, 0.9);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            z-index: 90;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
-        .footer-brand {
-            font-family: 'Courier New', Courier, monospace;
-            color: #ffffff;
-            font-size: 2.5rem;
+        .cart-bar:hover {
+            transform: scale(1.03);
+        }
+        .cart-bar span {
             font-weight: bold;
-            margin: 0;
-            letter-spacing: 1px;
+            color: #d8b4fe;
         }
-        .footer-disclaimer {
-            color: #71717a;
-            font-size: 0.9rem;
-            margin: 5px 0 25px 0;
-        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -227,6 +239,8 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             text-align: left;
             position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         .modal-content h2 {
             color: #d8b4fe;
@@ -249,6 +263,50 @@
         }
         .close-btn:hover {
             color: #ffffff;
+        }
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(39, 39, 42, 0.5);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .remove-item {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .remove-item:hover {
+            background: #dc2626;
+        }
+        .site-footer {
+            width: 100%;
+            background-color: #111111;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid #222;
+            margin-top: auto;
+            z-index: 10;
+        }
+        .footer-brand {
+            font-family: 'Courier New', Courier, monospace;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        .footer-disclaimer {
+            color: #71717a;
+            font-size: 0.9rem;
+            margin: 5px 0 25px 0;
         }
     </style>
 </head>
@@ -278,7 +336,8 @@
                         <li>Includes <code>/kit meteor</code></li>
                     </ul>
                 </div>
-                <button class="btn btn-active" onclick="openMeteorModal()">Buy Rank</button>
+                <div class="price-tag">5b</div>
+                <button class="btn btn-active" onclick="addToCart('Meteor Rank', 5, 'b')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -291,6 +350,7 @@
                         <li>Includes <code>/kit meteor+</code></li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">15b</div>
                 <button class="btn">Coming Soon</button>
             </div>
 
@@ -304,25 +364,27 @@
                         <li>Includes <code>/kit meteor++</code></li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">25b</div>
                 <button class="btn">Coming Soon</button>
             </div>
         </div>
 
         <h2 class="section-title" style="color: #c084fc;">Shards</h2>
         <div class="container">
-            <div class="card">
+            <div class="card card-featured">
+                <div class="badge">Open Now</div>
                 <div>
                     <h2 style="color: #d8b4fe;">400 Shards</h2>
                     <ul>
                         <li>400x Shards Bundle</li>
-                        <li>Use for server store cosmetics & items</li>
+                        <li>Instant in-game store currency</li>
                     </ul>
                 </div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">250m</div>
+                <button class="btn btn-active" onclick="addToCart('400 Shards', 250, 'm')">Add to Cart</button>
             </div>
 
-            <div class="card card-featured">
-                <div class="badge">Most Popular</div>
+            <div class="card">
                 <div>
                     <h2 style="color: #c084fc;">2,500 Shards</h2>
                     <ul>
@@ -330,6 +392,7 @@
                         <li>Best value for starters</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">1,500m</div>
                 <button class="btn">Coming Soon</button>
             </div>
 
@@ -342,6 +405,7 @@
                         <li>Includes 10% bonus shards</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">2,500m</div>
                 <button class="btn">Coming Soon</button>
             </div>
 
@@ -354,12 +418,65 @@
                         <li>Includes 20% bonus shards</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">5,000m</div>
                 <button class="btn">Coming Soon</button>
             </div>
         </div>
 
-        <h2 class="section-title" style="color: #fbbf24;">Crate Keys</h2>
+        <h2 class="section-title" style="color: #fbbf24;">Crate Keys & Bundles</h2>
         <div class="container">
+            <div class="card card-featured">
+                <div class="badge">Popular</div>
+                <div>
+                    <h2 style="color: #ff4545;">Crimson Key</h2>
+                    <ul>
+                        <li>1x Exclusive Crimson Key</li>
+                        <li>High-tier crate rewards</li>
+                    </ul>
+                </div>
+                <div class="price-tag">100m</div>
+                <button class="btn btn-active" onclick="addToCart('Crimson Key', 100, 'm')">Add to Cart</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h2 style="color: #e879f9;">Amethyst Key</h2>
+                    <ul>
+                        <li>1x Exclusive Amethyst Key</li>
+                        <li>Ultimate rarity crate rewards</li>
+                    </ul>
+                </div>
+                <div class="price-tag" style="color: #71717a;">300m</div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h2 style="color: #f43f5e;">Crimson & Amethyst</h2>
+                    <ul>
+                        <li>5x Crimson Keys</li>
+                        <li>1x Amethyst Key</li>
+                    </ul>
+                </div>
+                <div class="price-tag" style="color: #71717a;">750m</div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card card-featured">
+                <div class="badge">Ultimate Combo</div>
+                <div>
+                    <h2 style="color: #fbbf24;">High-Tier Combo</h2>
+                    <ul>
+                        <li>15x Common Keys</li>
+                        <li>35x Gold Keys</li>
+                        <li>5x Crimson Keys</li>
+                        <li>1x Amethyst Key</li>
+                    </ul>
+                </div>
+                <div class="price-tag" style="color: #71717a;">1,500m</div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
             <div class="card">
                 <div>
                     <h2 style="color: #4ade80;">Common Keys</h2>
@@ -367,6 +484,7 @@
                         <li>15x Common Keys Bundle</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">50m</div>
                 <button class="btn">Coming Soon</button>
             </div>
             <div class="card">
@@ -376,6 +494,7 @@
                         <li>35x Gold Keys Bundle</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">150m</div>
                 <button class="btn">Coming Soon</button>
             </div>
             <div class="card">
@@ -385,24 +504,44 @@
                         <li>5x Prime Keys Bundle</li>
                     </ul>
                 </div>
+                <div class="price-tag" style="color: #71717a;">200m</div>
                 <button class="btn">Coming Soon</button>
             </div>
         </div>
     </div>
 
-    <!-- Purchase Modal -->
-    <div id="meteorModal" class="modal">
+    <!-- Floating Checkout Bar -->
+    <div id="cartBar" class="cart-bar" style="display: none;" onclick="openCheckoutModal()">
+        <span>🛒 Cart (<span id="cartCount">0</span>)</span>
+        <span id="cartTotal" style="color: #4ade80;">0m</span>
+        <button class="btn-active" style="padding: 8px 16px; border-radius: 20px; border: none; font-size: 0.9rem;">Checkout »</button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeMeteorModal()">&times;</span>
-            <h2>How to Redeem Meteor Rank</h2>
-            <p>Follow these simple steps in-game to claim your Meteor rank:</p>
-            <ol style="line-height: 1.8; padding-left: 20px;">
-                <li>Join the server at <code>meteorsmp.abrdns.com</code></li>
-                <li>Buy the Meteor rank above to get your unique code (e.g. <code>METEOR-5949</code>)</li>
-                <li>Type the command in-game: <code>/redeem METEOR-5949</code></li>
-                <li>Type the command in-game: <code>/pay server 5b</code></li>
-            </ol>
-            <p style="color: #a78bfa; margin-top: 20px; font-weight: bold;">Your rank and perks will be unlocked instantly!</p>
+            <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
+            <h2>Express Checkout</h2>
+            <p>Review your selected items and complete your purchase instantly in-game:</p>
+            
+            <div id="cartItemsList" style="margin: 20px 0;">
+                <!-- Dynamically populated items -->
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 20px;">
+                <strong style="font-size: 1.2rem;">Total:</strong>
+                <span id="modalTotal" style="font-size: 1.3rem; color: #4ade80; font-weight: bold;">0m</span>
+            </div>
+
+            <div style="background: rgba(39, 39, 42, 0.8); padding: 15px; border-radius: 8px; border: 1px solid rgba(216, 180, 254, 0.2);">
+                <p style="margin: 0 0 10px 0; font-weight: bold; color: #d8b4fe;">In-Game Instructions:</p>
+                <ol style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
+                    <li>Join server at <code>meteorsmp.abrdns.com</code></li>
+                    <li>Type: <code id="paymentCommand">/pay server 0m</code></li>
+                </ol>
+            </div>
+
+            <button class="btn btn-active" style="width: 100%; margin-top: 20px; padding: 12px; cursor: pointer;" onclick="completeCheckout()">Complete Purchase</button>
         </div>
     </div>
 
@@ -412,16 +551,86 @@
     </footer>
 
     <script>
-        function openMeteorModal() {
-            document.getElementById('meteorModal').style.display = 'flex';
+        let cart = [];
+
+        function addToCart(name, price, unit) {
+            cart.push({ name, price, unit });
+            updateCartUI();
         }
 
-        function closeMeteorModal() {
-            document.getElementById('meteorModal').style.display = 'none';
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            if (cart.length === 0) {
+                closeCheckoutModal();
+            }
+        }
+
+        function updateCartUI() {
+            const cartBar = document.getElementById('cartBar');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length > 0) {
+                cartBar.style.display = 'flex';
+                cartCount.textContent = cart.length;
+                cartTotal.textContent = formatTotal();
+            } else {
+                cartBar.style.display = 'none';
+            }
+        }
+
+        function formatTotal() {
+            let totalM = 0;
+            let totalB = 0;
+            
+            cart.forEach(item => {
+                if (item.unit === 'b') totalB += item.price;
+                if (item.unit === 'm') totalM += item.price;
+            });
+
+            let parts = [];
+            if (totalB > 0) parts.push(`${totalB}b`);
+            if (totalM > 0) parts.push(`${totalM}m`);
+            return parts.join(' + ') || '0m';
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            
+            const listEl = document.getElementById('cartItemsList');
+            listEl.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                listEl.innerHTML += `
+                    <div class="checkout-item">
+                        <span>${item.name}</span>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span style="color: #4ade80; font-weight: bold;">${item.price}${item.unit}</span>
+                            <button class="remove-item" onclick="removeFromCart(${index})">&times;</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('modalTotal').textContent = formatTotal();
+            document.getElementById('paymentCommand').textContent = `/pay server ${formatTotal().toLowerCase()}`;
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function completeCheckout() {
+            alert('Order generated! Please execute the /pay command in-game at meteorsmp.abrdns.com to claim your items.');
+            cart = [];
+            updateCartUI();
+            closeCheckoutModal();
         }
 
         window.onclick = function(event) {
-            let modal = document.getElementById('meteorModal');
+            let modal = document.getElementById('checkoutModal');
             if (event.target == modal) {
                 modal.style.display = "none";
             }
