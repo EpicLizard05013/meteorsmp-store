@@ -310,4 +310,132 @@
             </div>
             <div class="card">
                 <div>
-                    <h2 style
+                    <h2 style="color: #4ade80;">Common Keys</h2>
+                    <ul>
+                        <li>15x Common Keys Bundle</li>
+                    </ul>
+                </div>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">50m</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #fbbf24;">Gold Keys</h2>
+                    <ul>
+                        <li>35x Gold Keys Bundle</li>
+                    </ul>
+                </div>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">150m</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #38bdf8;">Prime Keys</h2>
+                    <ul>
+                        <li>5x Prime Keys Bundle</li>
+                    </ul>
+                </div>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">200m</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartBar" class="cart-bar" onclick="openModal()">
+        <span>🛒 Cart (<span id="cartCount">0</span>)</span>
+        <span id="cartTotal" style="color: #4ade80; font-weight: bold;">0m</span>
+        <button class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Checkout »</button>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="color: #d8b4fe; margin-top:0;">Your Cart</h2>
+            <div id="cartItemsList"></div>
+            <div style="display:flex; justify-content:space-between; margin: 15px 0; font-weight:bold;">
+                <span>Total:</span>
+                <span id="modalTotal" style="color: #4ade80;">0m</span>
+            </div>
+            <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem;">
+                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">In-Game Payment:</p>
+                <code>/pay server <span id="payCommand">0m</span></code>
+            </div>
+            <button class="btn" style="width:100%; margin-top:15px; padding:10px;" onclick="checkout()">Complete Order</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price, unit) {
+            cart.push({ name, price, unit });
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+            if(cart.length === 0) closeModal();
+        }
+
+        function updateCart() {
+            const bar = document.getElementById('cartBar');
+            document.getElementById('cartCount').textContent = cart.length;
+            document.getElementById('cartTotal').textContent = formatTotal();
+            bar.style.display = cart.length > 0 ? 'flex' : 'none';
+        }
+
+        function formatTotal() {
+            let b = 0, m = 0;
+            cart.forEach(item => {
+                if(item.unit === 'b') b += item.price;
+                if(item.unit === 'm') m += item.price;
+            });
+            let res = [];
+            if(b > 0) res.push(b + 'b');
+            if(m > 0) res.push(m + 'm');
+            return res.join(' + ') || '0m';
+        }
+
+        function openModal() {
+            if(cart.length === 0) return;
+            let list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+            cart.forEach((item, index) => {
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <div>
+                            <span style="color:#4ade80; margin-right:10px;">${item.price}${item.unit}</span>
+                            <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
+                        </div>
+                    </div>
+                `;
+            });
+            let totalStr = formatTotal();
+            document.getElementById('modalTotal').textContent = totalStr;
+            document.getElementById('payCommand').textContent = totalStr.toLowerCase();
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function checkout() {
+            alert('Order placed! Run /pay server ' + formatTotal().toLowerCase() + ' in-game at meteorsmp.abrdns.com');
+            cart = [];
+            updateCart();
+            closeModal();
+        }
+
+        window.onclick = e => { if(e.target == document.getElementById('checkoutModal')) closeModal(); }
+    </script>
+</body>
+</html>
