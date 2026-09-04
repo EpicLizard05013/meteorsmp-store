@@ -102,6 +102,36 @@
             justify-content: space-between;
             transition: all 0.3s ease;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .card-featured {
+            border-color: rgba(167, 139, 250, 0.6);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+        }
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: linear-gradient(145deg, #7c3aed, #4c1d95);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+        .bonus-badge {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 10px;
         }
         .card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -272,6 +302,56 @@
                         <li>25 Vaults (/PV)</li>
                         <li><span style="color: #fb7185;">[Meteor++]</span> Chat & Tab Prefix</li>
                         <li>Includes <code>/kit meteor++</code></li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="color: #c084fc;">Shards</h2>
+        <div class="container">
+            <div class="card">
+                <div>
+                    <h2 style="color: #d8b4fe;">400 Shards</h2>
+                    <ul>
+                        <li>400x Shards Bundle</li>
+                        <li>Use for server store cosmetics & items</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card card-featured">
+                <div class="badge">Most Popular</div>
+                <div>
+                    <h2 style="color: #c084fc;">2,500 Shards</h2>
+                    <ul>
+                        <li>2,500x Shards Bundle</li>
+                        <li>Best value for starters</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="bonus-badge">+10% Bonus</span>
+                    <h2 style="color: #a855f7;">5,500 Shards</h2>
+                    <ul>
+                        <li>5,500x Shards Bundle</li>
+                        <li>Includes 10% bonus shards</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="bonus-badge">+20% Bonus</span>
+                    <h2 style="color: #9333ea;">12,000 Shards</h2>
+                    <ul>
+                        <li>12,000x Shards Bundle</li>
+                        <li>Includes 20% bonus shards</li>
                     </ul>
                 </div>
                 <button class="btn">Coming Soon</button>
