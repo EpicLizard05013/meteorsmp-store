@@ -6,8 +6,7 @@
     <title>MeteorSMP - Store & Info</title>
     <style>
         body {
-            background: radial-gradient(circle at center, #18181b 0%, #09090b 100%);
-            background-color: #09090b;
+            background: #09090b;
             color: #e4e4e7;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -17,442 +16,269 @@
             align-items: center;
             min-height: 100vh;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 32px 32px;
-            z-index: -1;
-        }
-        .content-wrapper {
+        .wrapper {
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
+            max-width: 1100px;
             width: 100%;
             box-sizing: border-box;
             padding-bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
             text-align: center;
-            margin-bottom: 30px;
-            margin-top: 20px;
+            margin: 20px 0 30px 0;
         }
         h1 {
             color: #d8b4fe;
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 5px;
-            text-shadow: 0 0 20px rgba(216, 180, 254, 0.6), 2px 2px 4px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
-        }
-        header p {
-            color: #d4d4d8;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            text-shadow: 0 0 15px rgba(216, 180, 254, 0.4);
         }
         .info-box {
-            background: rgba(24, 24, 27, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 20px 40px;
-            border-radius: 16px;
-            margin-bottom: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #18181b;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
-        .info-box h3 {
-            color: #f4f4f5;
-            margin-top: 0;
-            font-size: 1.4rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-        .info-box p {
-            margin: 8px 0;
-            font-size: 1.1rem;
         }
         code {
-            background-color: rgba(39, 39, 42, 0.8);
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: #27272a;
+            padding: 3px 6px;
+            border-radius: 4px;
             color: #d8b4fe;
-            border: 1px solid rgba(216, 180, 254, 0.2);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
         }
-        .container {
+        .section-title {
+            font-size: 1.8rem;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px;
-            max-width: 1100px;
-            margin-bottom: 60px;
+            gap: 20px;
+            width: 100%;
         }
         .card {
-            background: rgba(24, 24, 27, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            width: 280px;
-            padding: 30px 25px;
+            background: #18181b;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            width: 260px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             position: relative;
-        }
-        .card-featured {
-            border-color: rgba(167, 139, 250, 0.6);
-            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
-        }
-        .badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: linear-gradient(145deg, #7c3aed, #4c1d95);
-            color: #ffffff;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
-        }
-        .bonus-badge {
-            background: rgba(74, 222, 128, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         .card h2 {
             margin-top: 0;
-            font-size: 1.8rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            font-size: 1.5rem;
         }
         .card ul {
-            padding-left: 20px;
-            color: #e4e4e7;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            padding-left: 18px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d4d4d8;
         }
-        .price-tag {
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 12px;
+        }
+        .price {
             font-size: 1.2rem;
             font-weight: bold;
             color: #4ade80;
-            margin: 10px 0;
         }
         .btn {
-            background: linear-gradient(145deg, rgba(39, 39, 42, 0.9), rgba(24, 24, 27, 0.9));
-            color: #a1a1aa;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 14px;
-            border-radius: 8px;
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
             font-weight: bold;
-            cursor: not-allowed;
-            text-align: center;
-            margin-top: 15px;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn-active {
-            background: linear-gradient(145deg, #7c3aed, #4c1d95);
-            color: #ffffff;
             cursor: pointer;
-            border-color: #a78bfa;
+            transition: background 0.2s;
         }
-        .btn-active:hover {
-            background: linear-gradient(145deg, #8b5cf6, #5b21b6);
-            color: #ffffff;
+        .btn:hover { background: #6d28d9; }
+        .btn-disabled {
+            background: #27272a;
+            color: #71717a;
+            cursor: not-allowed;
         }
-        .section-title {
-            width: 100%;
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            letter-spacing: 1px;
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: #7c3aed;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
         }
-        
-        /* Floating Cart Bar */
+        /* Cart Bar */
         .cart-bar {
             position: fixed;
-            bottom: 25px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(24, 24, 27, 0.95);
-            backdrop-filter: blur(16px);
+            background: #18181b;
             border: 1px solid rgba(167, 139, 250, 0.4);
-            padding: 15px 30px;
-            border-radius: 50px;
-            display: flex;
+            padding: 12px 25px;
+            border-radius: 30px;
+            display: none;
             align-items: center;
             gap: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             z-index: 90;
             cursor: pointer;
-            transition: transform 0.2s;
-            white-space: nowrap;
         }
-        .cart-bar:hover {
-            transform: translateX(-50%) scale(1.03);
-        }
-        .cart-bar span {
-            font-weight: bold;
-            color: #d8b4fe;
-        }
-
-        /* Modal Styles */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            inset: 0;
+            background: rgba(0,0,0,0.8);
             align-items: center;
             justify-content: center;
+            z-index: 100;
         }
         .modal-content {
             background: #18181b;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
             width: 90%;
-            max-width: 550px;
-            padding: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            text-align: left;
+            max-width: 500px;
+            padding: 25px;
             position: relative;
-            max-height: 85vh;
-            overflow-y: auto;
         }
-        .modal-content h2 {
-            color: #d8b4fe;
-            margin-top: 0;
-        }
-        .modal-content p, .modal-content ul, .modal-content ol {
-            color: #d4d4d8;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-        .close-btn {
+        .close {
             position: absolute;
-            top: 20px;
-            right: 25px;
-            color: #a1a1aa;
-            font-size: 1.8rem;
-            font-weight: bold;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: color 0.2s;
+            color: #a1a1aa;
         }
-        .close-btn:hover {
-            color: #ffffff;
-        }
-        .checkout-item {
+        .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(39, 39, 42, 0.5);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #27272a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
         }
-        .remove-item {
+        .remove-btn {
             background: #ef4444;
-            color: white;
+            color: #fff;
             border: none;
-            padding: 4px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
-        }
-        .remove-item:hover {
-            background: #dc2626;
-        }
-        .site-footer {
-            width: 100%;
-            background-color: #111111;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 2px solid #222;
-            margin-top: auto;
-            z-index: 10;
-        }
-        .footer-brand {
-            font-family: 'Courier New', Courier, monospace;
-            color: #ffffff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 0;
-            letter-spacing: 1px;
-        }
-        .footer-disclaimer {
-            color: #71717a;
-            font-size: 0.9rem;
-            margin: 5px 0 25px 0;
         }
     </style>
 </head>
 <body>
 
-    <div class="content-wrapper">
+    <div class="wrapper">
         <header>
             <h1>MeteorSMP</h1>
-            <p>The official connection and store hub for the server.</p>
+            <p>Official Store & Connection Hub</p>
         </header>
 
         <div class="info-box">
-            <h3>🎮 Connection Information</h3>
-            <p><strong>Java Edition:</strong> <code>meteorsmp.abrdns.com</code></p>
-            <p><strong>Bedrock Edition:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
+            <p><strong>Java IP:</strong> <code>meteorsmp.abrdns.com</code></p>
+            <p><strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
         </div>
 
         <h2 class="section-title" style="color: #f472b6;">Server Ranks</h2>
-        <div class="container">
+        <div class="grid">
             <div class="card">
                 <div>
                     <h2 style="color: #a78bfa;">Meteor</h2>
                     <ul>
                         <li>3 Homes</li>
                         <li>10 Vaults (/PV)</li>
-                        <li><span style="color: #a78bfa;">[Meteor]</span> Chat & Tab Prefix</li>
-                        <li>Includes <code>/kit meteor</code></li>
+                        <li>[Meteor] Prefix</li>
+                        <li><code>/kit meteor</code></li>
                     </ul>
                 </div>
-                <div class="price-tag">5b</div>
-                <button class="btn btn-active" onclick="addToCart('Meteor Rank', 5, 'b')">Add to Cart</button>
+                <div class="price-row">
+                    <span class="price">5b</span>
+                    <button class="btn" onclick="addToCart('Meteor Rank', 5, 'b')">Add to Cart</button>
+                </div>
             </div>
-
             <div class="card">
                 <div>
                     <h2 style="color: #f472b6;">Meteor+</h2>
                     <ul>
                         <li>4 Homes</li>
                         <li>20 Vaults (/PV)</li>
-                        <li><span style="color: #f472b6;">[Meteor+]</span> Chat & Tab Prefix</li>
-                        <li>Includes <code>/kit meteor+</code></li>
+                        <li>[Meteor+] Prefix</li>
+                        <li><code>/kit meteor+</code></li>
                     </ul>
                 </div>
-                <div class="price-tag">15b</div>
-                <button class="btn btn-active" onclick="addToCart('Meteor+ Rank', 15, 'b')">Add to Cart</button>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">15b</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
+                </div>
             </div>
-
             <div class="card">
                 <div>
                     <h2 style="color: #fb7185;">Meteor++</h2>
                     <ul>
                         <li>5 Homes</li>
                         <li>25 Vaults (/PV)</li>
-                        <li><span style="color: #fb7185;">[Meteor++]</span> Chat & Tab Prefix</li>
-                        <li>Includes <code>/kit meteor++</code></li>
+                        <li>[Meteor++] Prefix</li>
+                        <li><code>/kit meteor++</code></li>
                     </ul>
                 </div>
-                <div class="price-tag">25b</div>
-                <button class="btn btn-active" onclick="addToCart('Meteor++ Rank', 25, 'b')">Add to Cart</button>
-            </div>
-        </div>
-
-        <h2 class="section-title" style="color: #c084fc;">Shards</h2>
-        <div class="container">
-            <div class="card card-featured">
-                <div class="badge">Open Now</div>
-                <div>
-                    <h2 style="color: #d8b4fe;">400 Shards</h2>
-                    <ul>
-                        <li>400x Shards Bundle</li>
-                        <li>Instant in-game store currency</li>
-                    </ul>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">25b</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
                 </div>
-                <div class="price-tag">250m</div>
-                <button class="btn btn-active" onclick="addToCart('400 Shards', 250, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h2 style="color: #c084fc;">2,500 Shards</h2>
-                    <ul>
-                        <li>2,500x Shards Bundle</li>
-                        <li>Best value for starters</li>
-                    </ul>
-                </div>
-                <div class="price-tag">1,500m</div>
-                <button class="btn btn-active" onclick="addToCart('2,500 Shards', 1500, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <span class="bonus-badge">+10% Bonus</span>
-                    <h2 style="color: #a855f7;">5,500 Shards</h2>
-                    <ul>
-                        <li>5,500x Shards Bundle</li>
-                        <li>Includes 10% bonus shards</li>
-                    </ul>
-                </div>
-                <div class="price-tag">2,500m</div>
-                <button class="btn btn-active" onclick="addToCart('5,500 Shards', 2500, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <span class="bonus-badge">+20% Bonus</span>
-                    <h2 style="color: #9333ea;">12,000 Shards</h2>
-                    <ul>
-                        <li>12,000x Shards Bundle</li>
-                        <li>Includes 20% bonus shards</li>
-                    </ul>
-                </div>
-                <div class="price-tag">5,000m</div>
-                <button class="btn btn-active" onclick="addToCart('12,000 Shards', 5000, 'm')">Add to Cart</button>
             </div>
         </div>
 
         <h2 class="section-title" style="color: #fbbf24;">Crate Keys & Bundles</h2>
-        <div class="container">
-            <div class="card card-featured">
+        <div class="grid">
+            <div class="card">
                 <div class="badge">Popular</div>
                 <div>
                     <h2 style="color: #ff4545;">Crimson Key</h2>
                     <ul>
-                        <li>1x Exclusive Crimson Key</li>
-                        <li>High-tier crate rewards</li>
+                        <li>1x Crimson Key</li>
+                        <li>High-tier rewards</li>
                     </ul>
                 </div>
-                <div class="price-tag">100m</div>
-                <button class="btn btn-active" onclick="addToCart('Crimson Key', 100, 'm')">Add to Cart</button>
+                <div class="price-row">
+                    <span class="price">100m</span>
+                    <button class="btn" onclick="addToCart('Crimson Key', 100, 'm')">Add to Cart</button>
+                </div>
             </div>
-
             <div class="card">
                 <div>
                     <h2 style="color: #e879f9;">Amethyst Key</h2>
                     <ul>
-                        <li>1x Exclusive Amethyst Key</li>
-                        <li>Ultimate rarity crate rewards</li>
+                        <li>1x Amethyst Key</li>
+                        <li>Ultimate rewards</li>
                     </ul>
                 </div>
-                <div class="price-tag">300m</div>
-                <button class="btn btn-active" onclick="addToCart('Amethyst Key', 300, 'm')">Add to Cart</button>
+                <div class="price-row">
+                    <span class="price">300m</span>
+                    <button class="btn" onclick="addToCart('Amethyst Key', 300, 'm')">Add to Cart</button>
+                </div>
             </div>
-
             <div class="card">
                 <div>
                     <h2 style="color: #f43f5e;">Crimson & Amethyst</h2>
@@ -461,12 +287,13 @@
                         <li>1x Amethyst Key</li>
                     </ul>
                 </div>
-                <div class="price-tag">750m</div>
-                <button class="btn btn-active" onclick="addToCart('Crimson & Amethyst Bundle', 750, 'm')">Add to Cart</button>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">750m</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
+                </div>
             </div>
-
-            <div class="card card-featured">
-                <div class="badge">Ultimate Combo</div>
+            <div class="card">
+                <div class="badge">Combo</div>
                 <div>
                     <h2 style="color: #fbbf24;">High-Tier Combo</h2>
                     <ul>
@@ -476,170 +303,105 @@
                         <li>1x Amethyst Key</li>
                     </ul>
                 </div>
-                <div class="price-tag">1,500m</div>
-                <button class="btn btn-active" onclick="addToCart('High-Tier Combo', 1500, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h2 style="color: #4ade80;">Common Keys</h2>
-                    <ul>
-                        <li>15x Common Keys Bundle</li>
-                    </ul>
+                <div class="price-row">
+                    <span class="price" style="color:#71717a">1,500m</span>
+                    <button class="btn btn-disabled">Coming Soon</button>
                 </div>
-                <div class="price-tag">50m</div>
-                <button class="btn btn-active" onclick="addToCart('15x Common Keys', 50, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h2 style="color: #fbbf24;">Gold Keys</h2>
-                    <ul>
-                        <li>35x Gold Keys Bundle</li>
-                    </ul>
-                </div>
-                <div class="price-tag">150m</div>
-                <button class="btn btn-active" onclick="addToCart('35x Gold Keys', 150, 'm')">Add to Cart</button>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h2 style="color: #38bdf8;">Prime Keys</h2>
-                    <ul>
-                        <li>5x Prime Keys Bundle</li>
-                    </ul>
-                </div>
-                <div class="price-tag">200m</div>
-                <button class="btn btn-active" onclick="addToCart('5x Prime Keys', 200, 'm')">Add to Cart</button>
             </div>
         </div>
     </div>
 
-    <!-- Floating Checkout Bar -->
-    <div id="cartBar" class="cart-bar" style="display: none;" onclick="openCheckoutModal()">
+    <!-- Cart Floating Bar -->
+    <div id="cartBar" class="cart-bar" onclick="openModal()">
         <span>🛒 Cart (<span id="cartCount">0</span>)</span>
-        <span id="cartTotal" style="color: #4ade80;">0m</span>
-        <button class="btn-active" style="padding: 8px 16px; border-radius: 20px; border: none; font-size: 0.9rem;">Checkout »</button>
+        <span id="cartTotal" style="color: #4ade80; font-weight: bold;">0m</span>
+        <button class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Checkout »</button>
     </div>
 
-    <!-- Checkout Modal -->
+    <!-- Modal -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
-            <h2>Express Checkout</h2>
-            <p>Review your selected items and complete your purchase instantly in-game:</p>
-            
-            <div id="cartItemsList" style="margin: 20px 0;">
-                <!-- Dynamically populated items -->
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="color: #d8b4fe; margin-top:0;">Your Cart</h2>
+            <div id="cartItemsList"></div>
+            <div style="display:flex; justify-content:space-between; margin: 15px 0; font-weight:bold;">
+                <span>Total:</span>
+                <span id="modalTotal" style="color: #4ade80;">0m</span>
             </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 20px;">
-                <strong style="font-size: 1.2rem;">Total:</strong>
-                <span id="modalTotal" style="font-size: 1.3rem; color: #4ade80; font-weight: bold;">0m</span>
+            <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem;">
+                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">In-Game Payment:</p>
+                <code>/pay server <span id="payCommand">0m</span></code>
             </div>
-
-            <div style="background: rgba(39, 39, 42, 0.8); padding: 15px; border-radius: 8px; border: 1px solid rgba(216, 180, 254, 0.2);">
-                <p style="margin: 0 0 10px 0; font-weight: bold; color: #d8b4fe;">In-Game Instructions:</p>
-                <ol style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
-                    <li>Join server at <code>meteorsmp.abrdns.com</code></li>
-                    <li>Type: <code id="paymentCommand">/pay server 0m</code></li>
-                </ol>
-            </div>
-
-            <button class="btn btn-active" style="width: 100%; margin-top: 20px; padding: 12px; cursor: pointer;" onclick="completeCheckout()">Complete Purchase</button>
+            <button class="btn" style="width:100%; margin-top:15px; padding:10px;" onclick="checkout()">Complete Order</button>
         </div>
     </div>
-
-    <footer class="site-footer">
-        <p class="footer-brand">MeteorSMP</p>
-        <p class="footer-disclaimer">Not affiliated with Mojang Studios.</p>
-    </footer>
 
     <script>
         let cart = [];
 
         function addToCart(name, price, unit) {
             cart.push({ name, price, unit });
-            updateCartUI();
+            updateCart();
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            updateCartUI();
-            if (cart.length === 0) {
-                closeCheckoutModal();
-            }
+            updateCart();
+            if(cart.length === 0) closeModal();
         }
 
-        function updateCartUI() {
-            const cartBar = document.getElementById('cartBar');
-            const cartCount = document.getElementById('cartCount');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            if (cart.length > 0) {
-                cartBar.style.display = 'flex';
-                cartCount.textContent = cart.length;
-                cartTotal.textContent = formatTotal();
-            } else {
-                cartBar.style.display = 'none';
-            }
+        function updateCart() {
+            const bar = document.getElementById('cartBar');
+            document.getElementById('cartCount').textContent = cart.length;
+            document.getElementById('cartTotal').textContent = formatTotal();
+            bar.style.display = cart.length > 0 ? 'flex' : 'none';
         }
 
         function formatTotal() {
-            let totalM = 0;
-            let totalB = 0;
-            
+            let b = 0, m = 0;
             cart.forEach(item => {
-                if (item.unit === 'b') totalB += item.price;
-                if (item.unit === 'm') totalM += item.price;
+                if(item.unit === 'b') b += item.price;
+                if(item.unit === 'm') m += item.price;
             });
-
-            let parts = [];
-            if (totalB > 0) parts.push(`${totalB}b`);
-            if (totalM > 0) parts.push(`${totalM}m`);
-            return parts.join(' + ') || '0m';
+            let res = [];
+            if(b > 0) res.push(b + 'b');
+            if(m > 0) res.push(m + 'm');
+            return res.join(' + ') || '0m';
         }
 
-        function openCheckoutModal() {
-            if (cart.length === 0) return;
-            
-            const listEl = document.getElementById('cartItemsList');
-            listEl.innerHTML = '';
-
+        function openModal() {
+            if(cart.length === 0) return;
+            let list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
             cart.forEach((item, index) => {
-                listEl.innerHTML += `
-                    <div class="checkout-item">
+                list.innerHTML += `
+                    <div class="cart-item">
                         <span>${item.name}</span>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <span style="color: #4ade80; font-weight: bold;">${item.price}${item.unit}</span>
-                            <button class="remove-item" onclick="removeFromCart(${index})">&times;</button>
+                        <div>
+                            <span style="color:#4ade80; margin-right:10px;">${item.price}${item.unit}</span>
+                            <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
                         </div>
                     </div>
                 `;
             });
-
-            document.getElementById('modalTotal').textContent = formatTotal();
-            document.getElementById('paymentCommand').textContent = `/pay server ${formatTotal().toLowerCase()}`;
+            let totalStr = formatTotal();
+            document.getElementById('modalTotal').textContent = totalStr;
+            document.getElementById('payCommand').textContent = totalStr.toLowerCase();
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
-        function closeCheckoutModal() {
+        function closeModal() {
             document.getElementById('checkoutModal').style.display = 'none';
         }
 
-        function completeCheckout() {
-            alert('Order generated! Please execute the /pay command in-game at meteorsmp.abrdns.com to claim your items.');
+        function checkout() {
+            alert('Order placed! Run /pay server ' + formatTotal().toLowerCase() + ' in-game at meteorsmp.abrdns.com');
             cart = [];
-            updateCartUI();
-            closeCheckoutModal();
+            updateCart();
+            closeModal();
         }
 
-        window.onclick = function(event) {
-            let modal = document.getElementById('checkoutModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        window.onclick = e => { if(e.target == document.getElementById('checkoutModal')) closeModal(); }
     </script>
 </body>
 </html>
