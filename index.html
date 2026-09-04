@@ -34,7 +34,7 @@
             flex: 1;
             width: 100%;
             box-sizing: border-box;
-            padding-bottom: 100px;
+            padding-bottom: 120px;
         }
         header {
             text-align: center;
@@ -194,7 +194,9 @@
         .cart-bar {
             position: fixed;
             bottom: 25px;
-            background: rgba(24, 24, 27, 0.9);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(24, 24, 27, 0.95);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(167, 139, 250, 0.4);
             padding: 15px 30px;
@@ -206,9 +208,10 @@
             z-index: 90;
             cursor: pointer;
             transition: transform 0.2s;
+            white-space: nowrap;
         }
         .cart-bar:hover {
-            transform: scale(1.03);
+            transform: translateX(-50%) scale(1.03);
         }
         .cart-bar span {
             font-weight: bold;
@@ -350,8 +353,8 @@
                         <li>Includes <code>/kit meteor+</code></li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">15b</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">15b</div>
+                <button class="btn btn-active" onclick="addToCart('Meteor+ Rank', 15, 'b')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -364,8 +367,8 @@
                         <li>Includes <code>/kit meteor++</code></li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">25b</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">25b</div>
+                <button class="btn btn-active" onclick="addToCart('Meteor++ Rank', 25, 'b')">Add to Cart</button>
             </div>
         </div>
 
@@ -392,8 +395,8 @@
                         <li>Best value for starters</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">1,500m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">1,500m</div>
+                <button class="btn btn-active" onclick="addToCart('2,500 Shards', 1500, 'm')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -405,8 +408,8 @@
                         <li>Includes 10% bonus shards</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">2,500m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">2,500m</div>
+                <button class="btn btn-active" onclick="addToCart('5,500 Shards', 2500, 'm')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -418,8 +421,8 @@
                         <li>Includes 20% bonus shards</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">5,000m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">5,000m</div>
+                <button class="btn btn-active" onclick="addToCart('12,000 Shards', 5000, 'm')">Add to Cart</button>
             </div>
         </div>
 
@@ -446,8 +449,8 @@
                         <li>Ultimate rarity crate rewards</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">300m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">300m</div>
+                <button class="btn btn-active" onclick="addToCart('Amethyst Key', 300, 'm')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -458,8 +461,8 @@
                         <li>1x Amethyst Key</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">750m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">750m</div>
+                <button class="btn btn-active" onclick="addToCart('Crimson & Amethyst Bundle', 750, 'm')">Add to Cart</button>
             </div>
 
             <div class="card card-featured">
@@ -473,8 +476,8 @@
                         <li>1x Amethyst Key</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">1,500m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">1,500m</div>
+                <button class="btn btn-active" onclick="addToCart('High-Tier Combo', 1500, 'm')">Add to Cart</button>
             </div>
 
             <div class="card">
@@ -484,9 +487,10 @@
                         <li>15x Common Keys Bundle</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">50m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">50m</div>
+                <button class="btn btn-active" onclick="addToCart('15x Common Keys', 50, 'm')">Add to Cart</button>
             </div>
+
             <div class="card">
                 <div>
                     <h2 style="color: #fbbf24;">Gold Keys</h2>
@@ -494,9 +498,10 @@
                         <li>35x Gold Keys Bundle</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">150m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">150m</div>
+                <button class="btn btn-active" onclick="addToCart('35x Gold Keys', 150, 'm')">Add to Cart</button>
             </div>
+
             <div class="card">
                 <div>
                     <h2 style="color: #38bdf8;">Prime Keys</h2>
@@ -504,8 +509,8 @@
                         <li>5x Prime Keys Bundle</li>
                     </ul>
                 </div>
-                <div class="price-tag" style="color: #71717a;">200m</div>
-                <button class="btn">Coming Soon</button>
+                <div class="price-tag">200m</div>
+                <button class="btn btn-active" onclick="addToCart('5x Prime Keys', 200, 'm')">Add to Cart</button>
             </div>
         </div>
     </div>
