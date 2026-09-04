@@ -21,7 +21,6 @@
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            /* Subtle procedural CSS grid pattern for a clean Minecraft UI feel without broken image links */
             background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 32px 32px;
@@ -139,6 +138,16 @@
             background: rgba(63, 63, 70, 0.9);
             color: #e4e4e7;
         }
+        .btn-active {
+            background: linear-gradient(145deg, #7c3aed, #4c1d95);
+            color: #ffffff;
+            cursor: pointer;
+            border-color: #a78bfa;
+        }
+        .btn-active:hover {
+            background: linear-gradient(145deg, #8b5cf6, #5b21b6);
+            color: #ffffff;
+        }
         .section-title {
             width: 100%;
             text-align: center;
@@ -188,7 +197,7 @@
             color: #ffffff;
         }
 
-        /* Modal Popup Styles for Safe Legal Pages */
+        /* Modal Popup Styles */
         .modal {
             display: none;
             position: fixed;
@@ -265,7 +274,7 @@
                         <li>Includes <code>/kit meteor</code></li>
                     </ul>
                 </div>
-                <button class="btn">Coming Soon</button>
+                <button class="btn btn-active" onclick="openMeteorModal()">Buy Rank</button>
             </div>
 
             <div class="card">
@@ -388,7 +397,21 @@
         </div>
     </div>
 
-    <!-- Modals for Legal Policies & Support (Anti-Liability Boilerplate) -->
+    <!-- Meteor Rank Purchase Modal -->
+    <div id="meteorBuyModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-btn" onclick="closeModal('meteorBuyModal')">&times;</span>
+            <h2 style="color: #a78bfa;">Meteor Rank Purchase</h2>
+            <p style="font-size: 1.2rem; color: #f4f4f5; margin-bottom: 5px;">Price: <strong>5b</strong></p>
+            <p style="color: #d4d4d8; margin-bottom: 25px;">To purchase the Meteor rank, join the server and execute the following payment command:</p>
+            <div style="margin: 20px 0;">
+                <code style="font-size: 1.2rem; padding: 12px 20px; display: inline-block;">/pay Server <span id="checkoutCode" style="color: #f472b6; font-weight: bold;">METEOR-4812</span></code>
+            </div>
+            <p style="font-size: 0.85rem; color: #71717a; margin-top: 20px;">Include your unique checkout code so the server logs your purchase correctly.</p>
+        </div>
+    </div>
+
+    <!-- Modals for Legal Policies & Support -->
     <div id="storePrivacyModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('storePrivacyModal')">&times;</span>
@@ -452,6 +475,11 @@
         }
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+        }
+        function openMeteorModal() {
+            const randomCode = 'METEOR-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('checkoutCode').innerText = randomCode;
+            document.getElementById('meteorBuyModal').style.display = 'flex';
         }
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
