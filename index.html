@@ -6,24 +6,31 @@
     <title>MeteorSMP - Store & Info</title>
     <style>
         body {
-            /* Using your provided image as a fixed background */
-            background: url('image_d5e721.png') no-repeat center center fixed;
+            /* Added a fallback color #09090b in case the image fails to load */
+            background: #09090b url('image_d5e721.png') no-repeat center center fixed;
             background-size: cover;
             color: #e4e4e7;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
-        /* Dark overlay to ensure text remains readable against the bright shaders */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(9, 9, 11, 0.6);
             z-index: -1;
+        }
+        .content-wrapper {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
         }
         header {
             text-align: center;
@@ -42,7 +49,6 @@
             font-size: 1.2rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
-        /* Glassmorphism effect for the boxes */
         .info-box {
             background: rgba(24, 24, 27, 0.65);
             backdrop-filter: blur(12px);
@@ -80,7 +86,6 @@
             max-width: 1100px;
             margin-bottom: 60px;
         }
-        /* Glassmorphism for the cards */
         .card {
             background: rgba(24, 24, 27, 0.65);
             backdrop-filter: blur(12px);
@@ -138,165 +143,205 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
             letter-spacing: 1px;
         }
-        footer {
-            margin-top: auto;
-            padding: 30px;
+        
+        /* New Footer Styles matching your image */
+        .site-footer {
+            width: 100%;
+            background-color: #111111;
+            padding: 40px 0;
             text-align: center;
+            border-top: 2px solid #222;
+            margin-top: auto;
+            z-index: 10;
+        }
+        .footer-brand {
+            font-family: 'Courier New', Courier, monospace; /* Pixel-style approximation */
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        .footer-disclaimer {
+            color: #71717a;
+            font-size: 0.9rem;
+            margin: 5px 0 25px 0;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        .footer-links a {
             color: #a1a1aa;
+            text-decoration: none;
             font-size: 0.95rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>MeteorSMP</h1>
-        <p>The official connection and store hub for the server.</p>
-    </header>
+    <div class="content-wrapper">
+        <header>
+            <h1>MeteorSMP</h1>
+            <p>The official connection and store hub for the server.</p>
+        </header>
 
-    <div class="info-box">
-        <h3>🎮 Connection Information</h3>
-        <p><strong>Java Edition:</strong> <code>meteorsmp.abrdns.com</code></p>
-        <p><strong>Bedrock Edition:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
+        <div class="info-box">
+            <h3>🎮 Connection Information</h3>
+            <p><strong>Java Edition:</strong> <code>meteorsmp.abrdns.com</code></p>
+            <p><strong>Bedrock Edition:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
+        </div>
+
+        <h2 class="section-title" style="color: #f472b6;">Server Ranks</h2>
+        <div class="container">
+            <div class="card">
+                <div>
+                    <h2 style="color: #a78bfa;">Meteor</h2>
+                    <ul>
+                        <li>3 Homes</li>
+                        <li>10 Vaults</li>
+                        <li>Includes <code>/kit meteor</code></li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h2 style="color: #f472b6;">Meteor+</h2>
+                    <ul>
+                        <li>4 Homes</li>
+                        <li>20 Vaults</li>
+                        <li>Includes <code>/kit meteor+</code></li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h2 style="color: #fb7185;">Meteor++</h2>
+                    <ul>
+                        <li>5 Homes</li>
+                        <li>25 Vaults</li>
+                        <li>Includes <code>/kit meteor++</code></li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="color: #fbbf24;">Crate Keys</h2>
+        <div class="container">
+            <div class="card">
+                <div>
+                    <h2 style="color: #4ade80;">Common Keys</h2>
+                    <ul>
+                        <li>15x Common Keys Bundle</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #fbbf24;">Gold Keys</h2>
+                    <ul>
+                        <li>35x Gold Keys Bundle</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #38bdf8;">Prime Keys</h2>
+                    <ul>
+                        <li>5x Prime Keys Bundle</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #ef4444;">Crimson Key</h2>
+                    <ul>
+                        <li>1x Crimson Key</li>
+                        <li style="color: #ef4444; font-weight: bold; list-style: none; margin-left: -20px; margin-top: 4px; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);">★ Most Popular</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #a855f7;">Amethyst Key</h2>
+                    <ul>
+                        <li>1x Amethyst Key</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #f43f5e;">High-Tier Bundle</h2>
+                    <ul>
+                        <li>3x Crimson Keys</li>
+                        <li>1x Amethyst Key</li>
+                    </ul>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="color: #c084fc;">Shard Bundles</h2>
+        <div class="container">
+            <div class="card">
+                <div>
+                    <h2 style="color: #e9d5ff;">400 Shards</h2>
+                    <p style="color: #d4d4d8;">Instant in-game currency bundle.</p>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #d8b4fe;">1,500 Shards</h2>
+                    <p style="color: #d4d4d8;">Popular currency package.</p>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #c084fc;">3,000 Shards</h2>
+                    <p style="color: #d4d4d8;">Great value tier.</p>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #a855f7;">3,500 Shards</h2>
+                    <p style="color: #d4d4d8;">Ultimate tier (+20% bonus).</p>
+                </div>
+                <button class="btn">Coming Soon</button>
+            </div>
+        </div>
     </div>
 
-    <h2 class="section-title" style="color: #f472b6;">Server Ranks</h2>
-    <div class="container">
-        <!-- Meteor Rank -->
-        <div class="card">
-            <div>
-                <h2 style="color: #a78bfa;">Meteor</h2>
-                <ul>
-                    <li>3 Homes</li>
-                    <li>10 Vaults</li>
-                    <li>Includes <code>/kit meteor</code></li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
+    <!-- Replicated Footer based on reference image -->
+    <footer class="site-footer">
+        <h2 class="footer-brand">meteorsmp.abrdns.com</h2>
+        <p class="footer-disclaimer">Not associated with Mojang or Microsoft</p>
+        <div class="footer-links">
+            <a href="#">Store Privacy Policy</a>
+            <a href="#">Meteor Privacy Policy</a>
+            <a href="#">Support</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Refund Policy</a>
         </div>
-
-        <!-- Meteor+ Rank -->
-        <div class="card">
-            <div>
-                <h2 style="color: #f472b6;">Meteor+</h2>
-                <ul>
-                    <li>4 Homes</li>
-                    <li>20 Vaults</li>
-                    <li>Includes <code>/kit meteor+</code></li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-
-        <!-- Meteor++ Rank -->
-        <div class="card">
-            <div>
-                <h2 style="color: #fb7185;">Meteor++</h2>
-                <ul>
-                    <li>5 Homes</li>
-                    <li>25 Vaults</li>
-                    <li>Includes <code>/kit meteor++</code></li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-    </div>
-
-    <h2 class="section-title" style="color: #fbbf24;">Crate Keys</h2>
-    <div class="container">
-        <div class="card">
-            <div>
-                <h2 style="color: #4ade80;">Common Keys</h2>
-                <ul>
-                    <li>15x Common Keys Bundle</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #fbbf24;">Gold Keys</h2>
-                <ul>
-                    <li>35x Gold Keys Bundle</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #38bdf8;">Prime Keys</h2>
-                <ul>
-                    <li>5x Prime Keys Bundle</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #ef4444;">Crimson Key</h2>
-                <ul>
-                    <li>1x Crimson Key</li>
-                    <li style="color: #ef4444; font-weight: bold; list-style: none; margin-left: -20px; margin-top: 4px; text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);">★ Most Popular</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #a855f7;">Amethyst Key</h2>
-                <ul>
-                    <li>1x Amethyst Key</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #f43f5e;">High-Tier Bundle</h2>
-                <ul>
-                    <li>5x Crimson Keys</li>
-                    <li>2x Amethyst Keys</li>
-                </ul>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-    </div>
-
-    <h2 class="section-title" style="color: #c084fc;">Shard Bundles</h2>
-    <div class="container">
-        <div class="card">
-            <div>
-                <h2 style="color: #e9d5ff;">400 Shards</h2>
-                <p style="color: #d4d4d8;">Instant in-game currency bundle.</p>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #d8b4fe;">1,500 Shards</h2>
-                <p style="color: #d4d4d8;">Popular currency package.</p>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #c084fc;">3,500 Shards</h2>
-                <p style="color: #d4d4d8;">Best value (+10% bonus).</p>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-        <div class="card">
-            <div>
-                <h2 style="color: #a855f7;">5,000 Shards</h2>
-                <p style="color: #d4d4d8;">Ultimate tier (+20% bonus).</p>
-            </div>
-            <button class="btn">Coming Soon</button>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 MeteorSMP. Not affiliated with Mojang AB.</p>
     </footer>
 
 </body>
