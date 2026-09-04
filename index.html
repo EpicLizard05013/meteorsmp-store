@@ -6,9 +6,9 @@
     <title>MeteorSMP - Store & Info</title>
     <style>
         body {
-            background-color: #0f0f11;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            background-color: #09090b;
+            color: #e4e4e7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,80 +17,124 @@
         }
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            margin-top: 20px;
         }
         h1 {
-            color: #b19cd9;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            color: #d8b4fe;
+            font-size: 3rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(216, 180, 254, 0.3);
+        }
+        header p {
+            color: #a1a1aa;
+            font-size: 1.1rem;
         }
         .info-box {
             background: #18181b;
-            padding: 15px 30px;
-            border-radius: 8px;
-            margin-bottom: 40px;
+            padding: 20px 40px;
+            border-radius: 12px;
+            margin-bottom: 50px;
             border: 1px solid #27272a;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .info-box h3 {
+            color: #f4f4f5;
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        .info-box p {
+            margin: 8px 0;
+            font-size: 1.05rem;
+        }
+        code {
+            background-color: #27272a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #d8b4fe;
         }
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            max-width: 1000px;
+            gap: 25px;
+            max-width: 1100px;
+            margin-bottom: 60px;
         }
         .card {
             background: #18181b;
             border: 1px solid #27272a;
-            border-radius: 10px;
+            border-radius: 12px;
             width: 280px;
-            padding: 25px;
+            padding: 30px 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #52525b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         .card h2 {
             margin-top: 0;
-            color: #d8b4fe;
+            font-size: 1.8rem;
         }
         .card ul {
             padding-left: 20px;
             color: #a1a1aa;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.8;
         }
         .btn {
             background-color: #27272a;
-            color: #a1a1aa;
- &nbsp;          border: none;
-            padding: 12px;
-            border-radius: 6px;
+            color: #71717a;
+            border: 1px solid #3f3f46;
+            padding: 14px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: not-allowed;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
+            transition: background-color 0.2s;
         }
-    </style>
+        .section-title {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            text-align: center;
+            color: #52525b;
+            font-size: 0.9rem;
+        }
+    </footer-style>
 </head>
 <body>
 
     <header>
         <h1>MeteorSMP</h1>
-        <p>Welcome to the official connection and store hub!</p>
+        <p>The official connection and store hub for the server.</p>
     </header>
 
     <div class="info-box">
-        <h3>Connection Information</h3>
-        <p><strong>Java Edition:</strong> meteorsmp.abrdns.com</p>
-        <p><strong>Bedrock Edition:</strong> atoms-converters.tun.ply.gg (Port: 59877)</p>
+        <h3>🎮 Connection Information</h3>
+        <p><strong>Java Edition:</strong> <code>meteorsmp.abrdns.com</code></p>
+        <p><strong>Bedrock Edition:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
     </div>
 
-    <h2 style="width: 100%; text-align: center; color: #f472b6;">Server Ranks</h2>
+    <h2 class="section-title" style="color: #f472b6;">Server Ranks</h2>
     <div class="container">
         <!-- Meteor Rank -->
         <div class="card">
             <div>
-                <h2>Meteor</h2>
+                <h2 style="color: #a78bfa;">Meteor</h2>
                 <ul>
                     <li>3 Homes</li>
                     <li>10 Vaults</li>
@@ -103,7 +147,7 @@
         <!-- Meteor+ Rank -->
         <div class="card">
             <div>
-                <h2>Meteor+</h2>
+                <h2 style="color: #f472b6;">Meteor+</h2>
                 <ul>
                     <li>4 Homes</li>
                     <li>20 Vaults</li>
@@ -116,7 +160,7 @@
         <!-- Meteor++ Rank -->
         <div class="card">
             <div>
-                <h2>Meteor++</h2>
+                <h2 style="color: #fb7185;">Meteor++</h2>
                 <ul>
                     <li>5 Homes</li>
                     <li>25 Vaults</li>
@@ -127,11 +171,11 @@
         </div>
     </div>
 
-    <h2 style="width: 100%; text-align: center; color: #fbbf24; margin-top: 40px;">Crate Keys</h2>
+    <h2 class="section-title" style="color: #fbbf24;">Crate Keys</h2>
     <div class="container">
         <div class="card">
             <div>
-                <h2>Common Keys</h2>
+                <h2 style="color: #fcd34d;">Common Keys</h2>
                 <ul>
                     <li>15x Common Keys Bundle</li>
                 </ul>
@@ -140,7 +184,7 @@
         </div>
         <div class="card">
             <div>
-                <h2>Gold Keys</h2>
+                <h2 style="color: #fbbf24;">Gold Keys</h2>
                 <ul>
                     <li>35x Gold Keys Bundle</li>
                 </ul>
@@ -149,7 +193,7 @@
         </div>
         <div class="card">
             <div>
-                <h2>Prime Keys</h2>
+                <h2 style="color: #38bdf8;">Prime Keys</h2>
                 <ul>
                     <li>5x Prime Keys Bundle</li>
                 </ul>
@@ -158,7 +202,7 @@
         </div>
         <div class="card">
             <div>
-                <h2>High-Tier Keys</h2>
+                <h2 style="color: #f43f5e;">High-Tier Keys</h2>
                 <ul>
                     <li>1x Crimson Key</li>
                     <li>1x Amethyst Key</li>
@@ -168,37 +212,41 @@
         </div>
     </div>
 
-    <h2 style="width: 100%; text-align: center; color: #c084fc; margin-top: 40px;">Shard Bundles</h2>
+    <h2 class="section-title" style="color: #c084fc;">Shard Bundles</h2>
     <div class="container">
         <div class="card">
             <div>
-                <h2>400 Shards</h2>
+                <h2 style="color: #e9d5ff;">400 Shards</h2>
                 <p style="color: #a1a1aa;">Instant in-game currency bundle.</p>
             </div>
             <button class="btn">Coming Soon</button>
         </div>
         <div class="card">
             <div>
-                <h2>2,500 Shards</h2>
+                <h2 style="color: #d8b4fe;">2,500 Shards</h2>
                 <p style="color: #a1a1aa;">Popular currency package.</p>
             </div>
             <button class="btn">Coming Soon</button>
         </div>
         <div class="card">
             <div>
-                <h2>5,500 Shards</h2>
+                <h2 style="color: #c084fc;">5,500 Shards</h2>
                 <p style="color: #a1a1aa;">Best value (+10% bonus).</p>
             </div>
             <button class="btn">Coming Soon</button>
         </div>
         <div class="card">
             <div>
-                <h2>12,000 Shards</h2>
+                <h2 style="color: #a855f7;">12,000 Shards</h2>
                 <p style="color: #a1a1aa;">Ultimate tier (+20% bonus).</p>
             </div>
             <button class="btn">Coming Soon</button>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 MeteorSMP. Not affiliated with Mojang AB.</p>
+    </footer>
 
 </body>
 </html>
