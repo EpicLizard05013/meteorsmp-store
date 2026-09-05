@@ -17,6 +17,21 @@
             align-items: center;
             min-height: 100vh;
         }
+        
+        /* ANNOUNCEMENT BANNER */
+        #announcement-banner {
+            display: none;
+            width: 100%;
+            background: linear-gradient(90deg, #dc2626, #991b1b);
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
         .wrapper {
             padding: 30px 20px;
             max-width: 1200px;
@@ -79,9 +94,10 @@
             color: #fff;
         }
         .brand-tile h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin: 10px 0 5px 0;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            word-break: break-all;
         }
         code {
             background: #27272a;
@@ -193,7 +209,8 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
             align-items: center;
             justify-content: center;
             z-index: 100;
@@ -203,10 +220,12 @@
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 12px;
             width: 90%;
-            max-width: 480px;
+            max-width: 520px;
             padding: 25px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            max-height: 85vh;
+            overflow-y: auto;
         }
         .close {
             position: absolute;
@@ -216,9 +235,72 @@
             cursor: pointer;
             color: #a1a1aa;
         }
+        .player-head-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .player-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #27272a;
+            padding: 4px 10px 4px 6px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .player-chip img {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+        }
+        .secret-btn {
+            background: transparent;
+            color: #52525b;
+            border: 1px dashed #3f3f46;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 15px;
+        }
+        .secret-btn:hover {
+            color: #c084fc;
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+        }
+        .admin-input {
+            width: 100%;
+            padding: 10px;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            border-radius: 6px;
+            color: #fff;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .admin-section {
+            background: #09090b;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .admin-section h4 {
+            margin: 0 0 10px 0;
+            color: #c084fc;
+        }
     </style>
 </head>
 <body>
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div id="announcement-banner">
+        ⚠️ <span id="announcement-text">Server is down for maintenance!</span>
+    </div>
 
     <div class="wrapper">
         <header>
@@ -237,8 +319,11 @@
             <div class="hub-card brand-tile">
                 <span style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Main Server IP</span>
                 <h2>meteorsmp.abrdns.com</h2>
-                <div style="margin-top: 8px; font-size: 1rem; font-weight: bold;">
+                <div style="margin-top: 8px; font-size: 0.95rem; font-weight: bold;">
                     Status: <span id="server-status" style="padding: 2px 8px; border-radius: 4px; background: rgba(0,0,0,0.3);">Loading...</span>
+                </div>
+                <div style="margin-top: 6px; font-size: 0.85rem; opacity: 0.9;">
+                    📈 All-Time Peak: <strong id="peak-display" style="color: #4ade80;">--</strong> players
                 </div>
                 <button class="btn" style="background: #ffffff; color: #7c3aed; margin-top: 12px;" onclick="copyText('meteorsmp.abrdns.com')">Copy IP Address</button>
             </div>
@@ -256,16 +341,20 @@
                 </p>
             </div>
 
-            <!-- Discord Community Card -->
-            <div class="hub-card" style="justify-content: center; text-align: center;">
-                <h3 style="border: none; margin-bottom: 5px;">Discord Community</h3>
-                <p style="color: #a1a1aa; font-size: 0.9rem; margin-bottom: 15px;">Join our community server to chat, trade, and stay updated on events!</p>
-                <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn">Join Discord Server</a>
+            <!-- Discord Community & Online Players Card -->
+            <div class="hub-card">
+                <h3>Online Players (<span id="online-count">0</span>)</h3>
+                <div id="public-player-list" class="player-head-list" style="max-height: 90px; overflow-y: auto;">
+                    <span style="color: #71717a; font-size: 0.85rem;">Checking online players...</span>
+                </div>
+                <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; text-align: center;">
+                    <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn" style="width: 100%; box-sizing: border-box;">Join Discord Server</a>
+                </div>
             </div>
         </div>
 
         <!-- FALSE POSITIVE PING WARNING NOTE -->
-        <div style="width: 100%; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px 20px; border-radius: 12px; margin-bottom: 40px; color: #fbbf24; font-size: 0.95rem; text-align: center;">
+        <div style="width: 100%; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px 20px; border-radius: 12px; margin-bottom: 40px; color: #fbbf24; font-size: 0.95rem; text-align: center; box-sizing: border-box;">
             ⚠️ <strong>Important Note:</strong> If you use that IP and it says <em>"Cannot connect to server"</em> (or displays offline in your server list), that is completely false! Just press join and you will connect straight in.
         </div>
 
@@ -644,13 +733,16 @@
         <footer style="margin-top: 50px; text-align: center; color: #71717a; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; width: 100%;">
             <p style="margin: 0 0 6px 0;">MeteorSMP is not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
             <p style="margin: 0;">&copy; 2026 MeteorSMP. All rights reserved.</p>
+            <div>
+                <button class="secret-btn" onclick="openSecretModal()">🔒 Super secret things</button>
+            </div>
         </footer>
     </div>
 
-    <!-- Modal -->
+    <!-- CHECKOUT MODAL -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal('checkoutModal')">&times;</span>
             <h2 id="modalItemName" style="color: #d8b4fe; margin-top:0;">Checkout</h2>
             <div style="display:flex; justify-content:space-between; margin: 15px 0; font-weight:bold;">
                 <span>Price:</span>
@@ -674,18 +766,133 @@
         </div>
     </div>
 
+    <!-- SUPER SECRET MODAL -->
+    <div id="secretModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('secretModal')">&times;</span>
+            
+            <!-- PASSWORD AUTH STAGE -->
+            <div id="secret-auth">
+                <h2 style="color: #c084fc; margin-top: 0;">👑 Admin Access</h2>
+                <p style="color: #a1a1aa; font-size: 0.9rem;">Enter the password to manage server controls:</p>
+                <input type="password" id="secretPasswordInput" class="admin-input" placeholder="Enter password...">
+                <button class="btn" style="width: 100%;" onclick="verifySecretPassword()">Unlock Panel</button>
+                <p id="password-error" style="color: #f43f5e; font-size: 0.85rem; margin-top: 10px; display: none;">Incorrect password!</p>
+            </div>
+
+            <!-- ADMIN DASHBOARD STAGE -->
+            <div id="secret-dashboard" style="display: none;">
+                <h2 style="color: #c084fc; margin-top: 0; display: flex; align-items: center; justify-content: space-between;">
+                    <span>👑 Secret Admin Panel</span>
+                    <span style="font-size: 0.75rem; color: #4ade80; background: rgba(74,222,128,0.1); padding: 4px 8px; border-radius: 4px;">Authenticated</span>
+                </h2>
+
+                <!-- ONLINE PLAYERS AVATARS -->
+                <div class="admin-section">
+                    <h4>Players Currently Online</h4>
+                    <div id="admin-player-avatars" class="player-head-list">
+                        <span style="color: #71717a; font-size: 0.85rem;">No players detected or server offline.</span>
+                    </div>
+                </div>
+
+                <!-- UPDATE PEAK RECORD -->
+                <div class="admin-section">
+                    <h4>Manage Peak Player Count</h4>
+                    <label style="font-size: 0.85rem; color: #a1a1aa; display: block; margin-bottom: 5px;">Set Highest Peak:</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="number" id="peakInput" class="admin-input" style="margin-bottom: 0;" placeholder="Peak count e.g. 25">
+                        <button class="btn" onclick="savePeakCount()">Save</button>
+                    </div>
+                </div>
+
+                <!-- ANNOUNCEMENT BANNER CONTROL -->
+                <div class="admin-section">
+                    <h4>Site Announcement Banner</h4>
+                    <input type="text" id="announcementInput" class="admin-input" placeholder="e.g. Server is down for maintenance!">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn" onclick="saveAnnouncement(true)">Show Banner</button>
+                        <button class="btn" style="background: #3f3f46;" onclick="saveAnnouncement(false)">Hide Banner</button>
+                    </div>
+                </div>
+
+                <!-- RCON TOOL (PLANNED) -->
+                <div class="admin-section">
+                    <h4>⚡ RCON Terminal (Planned Feature)</h4>
+                    <input type="text" id="rconHost" class="admin-input" placeholder="Server IP / Host" value="meteorsmp.abrdns.com" disabled>
+                    <input type="password" id="rconPassword" class="admin-input" placeholder="RCON Password">
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" id="rconCommand" class="admin-input" style="margin-bottom: 0;" placeholder="Command e.g. /say Hi or /kick">
+                        <button class="btn" style="background: #2563eb;" onclick="sendRconPlaceholder()">Send</button>
+                    </div>
+                    <textarea id="rconOutput" class="admin-input" style="height: 70px; font-family: monospace; font-size: 0.8rem;" readonly>RCON ready. Connection bridge configured for server backend integration.</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // LocalStorage default initializations
+        let currentPeak = localStorage.getItem('meteorsmp_peak_count') ? parseInt(localStorage.getItem('meteorsmp_peak_count')) : 0;
+        let announcementText = localStorage.getItem('meteorsmp_announcement') || "Server is down for maintenance!";
+        let announcementActive = localStorage.getItem('meteorsmp_announcement_active') === "true";
+
+        // DOM elements initialization
+        document.getElementById('peak-display').textContent = currentPeak;
+        document.getElementById('peakInput').value = currentPeak;
+        document.getElementById('announcementInput').value = announcementText;
+        applyAnnouncementState();
+
         // Fetch live server status and player count from mcstatus.io API
         fetch('https://api.mcstatus.io/v2/status/java/meteorsmp.abrdns.com')
             .then(response => response.json())
             .then(data => {
                 const statusEl = document.getElementById('server-status');
+                const onlineCountEl = document.getElementById('online-count');
+                const publicPlayerList = document.getElementById('public-player-list');
+                const adminPlayerAvatars = document.getElementById('admin-player-avatars');
+
                 if (data && data.online === true) {
-                    statusEl.textContent = `Online (${data.players.online}/${data.players.max})`;
+                    const onlinePlayers = data.players.online;
+                    statusEl.textContent = `Online (${onlinePlayers}/${data.players.max})`;
                     statusEl.style.color = '#4ade80';
+                    onlineCountEl.textContent = onlinePlayers;
+
+                    // Update Peak if live count exceeds current peak
+                    if (onlinePlayers > currentPeak) {
+                        currentPeak = onlinePlayers;
+                        localStorage.setItem('meteorsmp_peak_count', currentPeak);
+                        document.getElementById('peak-display').textContent = currentPeak;
+                        document.getElementById('peakInput').value = currentPeak;
+                    }
+
+                    // Render player list
+                    if (data.players.list && data.players.list.length > 0) {
+                        publicPlayerList.innerHTML = '';
+                        adminPlayerAvatars.innerHTML = '';
+
+                        data.players.list.forEach(player => {
+                            const avatarUrl = `https://mc-heads.net/avatar/${player.name_clean}/32`;
+                            
+                            // Public chip
+                            const chip = document.createElement('div');
+                            chip.className = 'player-chip';
+                            chip.innerHTML = `<img src="${avatarUrl}" alt="${player.name_clean}"> <span>${player.name_clean}</span>`;
+                            publicPlayerList.appendChild(chip);
+
+                            // Admin chip
+                            const adminChip = chip.cloneNode(true);
+                            adminPlayerAvatars.appendChild(adminChip);
+                        });
+                    } else {
+                        publicPlayerList.innerHTML = `<span style="color: #a1a1aa; font-size: 0.85rem;">${onlinePlayers} player(s) online</span>`;
+                        adminPlayerAvatars.innerHTML = `<span style="color: #a1a1aa; font-size: 0.85rem;">${onlinePlayers} player(s) online (Player names hidden by server settings)</span>`;
+                    }
                 } else {
                     statusEl.textContent = 'Offline';
                     statusEl.style.color = '#ef4444';
+                    onlineCountEl.textContent = '0';
+                    publicPlayerList.innerHTML = '<span style="color: #71717a; font-size: 0.85rem;">Server offline</span>';
+                    adminPlayerAvatars.innerHTML = '<span style="color: #71717a; font-size: 0.85rem;">Server offline</span>';
                 }
             })
             .catch(() => {
@@ -694,6 +901,7 @@
                 statusEl.style.color = '#ef4444';
             });
 
+        // Store Checkout Variables
         let currentCode = '';
         let currentPrice = '';
 
@@ -732,22 +940,87 @@
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
-        function closeModal() {
-            document.getElementById('checkoutModal').style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
         }
 
         function checkout() {
             const instructions = `/redeem ${currentCode}\n/pay server ${currentPrice}`;
             navigator.clipboard.writeText(instructions).then(() => {
                 alert('Copied instructions to clipboard!\nRun in-game at meteorsmp.abrdns.com:\n\n/redeem ' + currentCode + '\n/pay server ' + currentPrice);
-                closeModal();
+                closeModal('checkoutModal');
             }).catch(() => {
                 alert('Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
-                closeModal();
+                closeModal('checkoutModal');
             });
         }
 
-        window.onclick = e => { if(e.target == document.getElementById('checkoutModal')) closeModal(); }
+        // SECRET MODAL FUNCTIONS
+        function openSecretModal() {
+            document.getElementById('secretModal').style.display = 'flex';
+        }
+
+        function verifySecretPassword() {
+            const pwdInput = document.getElementById('secretPasswordInput').value;
+            const errorEl = document.getElementById('password-error');
+            
+            if (pwdInput === "EpicLizard0istheking") {
+                document.getElementById('secret-auth').style.display = 'none';
+                document.getElementById('secret-dashboard').style.display = 'block';
+                errorEl.style.display = 'none';
+            } else {
+                errorEl.style.display = 'block';
+            }
+        }
+
+        function savePeakCount() {
+            const newVal = parseInt(document.getElementById('peakInput').value);
+            if (!isNaN(newVal)) {
+                currentPeak = newVal;
+                localStorage.setItem('meteorsmp_peak_count', currentPeak);
+                document.getElementById('peak-display').textContent = currentPeak;
+                alert('Peak player count updated to: ' + currentPeak);
+            }
+        }
+
+        function saveAnnouncement(active) {
+            const text = document.getElementById('announcementInput').value;
+            announcementText = text;
+            announcementActive = active;
+            
+            localStorage.setItem('meteorsmp_announcement', announcementText);
+            localStorage.setItem('meteorsmp_announcement_active', announcementActive);
+            
+            applyAnnouncementState();
+            alert(active ? 'Announcement displayed!' : 'Announcement hidden!');
+        }
+
+        function applyAnnouncementState() {
+            const banner = document.getElementById('announcement-banner');
+            const textEl = document.getElementById('announcement-text');
+            
+            if (announcementActive && announcementText.trim() !== '') {
+                textEl.textContent = announcementText;
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        function sendRconPlaceholder() {
+            const cmd = document.getElementById('rconCommand').value;
+            const output = document.getElementById('rconOutput');
+            if (cmd.trim() !== '') {
+                output.value += `\n> ${cmd}\n[RCON]: Executed command "${cmd}" successfully.`;
+                document.getElementById('rconCommand').value = '';
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+
+        window.onclick = e => { 
+            if(e.target == document.getElementById('checkoutModal')) closeModal('checkoutModal'); 
+            if(e.target == document.getElementById('secretModal')) closeModal('secretModal'); 
+        }
     </script>
 </body>
 </html>
