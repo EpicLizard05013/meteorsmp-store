@@ -113,6 +113,7 @@
             background: #27272a;
             color: #71717a;
             cursor: not-allowed;
+            font-size: 0.85rem;
         }
         .badge {
             position: absolute;
@@ -230,7 +231,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">15b</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
             <div class="card">
@@ -245,7 +246,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">25b</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
         </div>
@@ -289,7 +290,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">750m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
             <div class="card">
@@ -305,7 +306,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">1,500m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
             <div class="card">
@@ -317,7 +318,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">50m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
             <div class="card">
@@ -329,7 +330,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">150m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
             <div class="card">
@@ -341,18 +342,20 @@
                 </div>
                 <div class="price-row">
                     <span class="price" style="color:#71717a">200m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn btn-disabled">Out of Stock</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Cart Floating Bar -->
     <div id="cartBar" class="cart-bar" onclick="openModal()">
         <span>🛒 Cart (<span id="cartCount">0</span>)</span>
         <span id="cartTotal" style="color: #4ade80; font-weight: bold;">0m</span>
         <button class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Checkout »</button>
     </div>
 
+    <!-- Modal -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
