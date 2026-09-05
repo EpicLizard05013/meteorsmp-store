@@ -299,7 +299,7 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">500m</span>
+                    <span class="price">300m</span>
                     <button class="btn btn-disabled">Coming Soon</button>
                 </div>
             </div>
@@ -312,7 +312,7 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">750m</span>
+                    <span class="price">450m</span>
                     <button class="btn btn-disabled">Coming Soon</button>
                 </div>
             </div>
@@ -325,7 +325,7 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">3,250m</span>
+                    <span class="price">1,950m</span>
                     <button class="btn btn-disabled">Coming Soon</button>
                 </div>
             </div>
@@ -341,7 +341,7 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">3,365m</span>
+                    <span class="price">2,065m</span>
                     <button class="btn btn-disabled">Coming Soon</button>
                 </div>
             </div>
@@ -365,8 +365,12 @@
                 <span>Total:</span>
                 <span id="modalTotal" style="color: #4ade80;">0m</span>
             </div>
+            <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 10px;">
+                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redeem Code Instruction:</p>
+                <code>/redeem <span id="redeemCommand">meteor-xxxxxx</span></code>
+            </div>
             <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem;">
-                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">In-Game Payment:</p>
+                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">2. In-Game Payment Instruction:</p>
                 <code>/pay server <span id="payCommand">0m</span></code>
             </div>
             <button class="btn" style="width:100%; margin-top:15px; padding:10px;" onclick="checkout()">Complete Order</button>
@@ -375,6 +379,7 @@
 
     <script>
         let cart = [];
+        let currentCode = '';
 
         function addToCart(name, price, unit) {
             cart.push({ name, price, unit });
@@ -421,8 +426,10 @@
                     </div>
                 `;
             });
+            currentCode = 'meteor-' + Math.random().toString(36).substring(2, 8);
             let totalStr = formatTotal();
             document.getElementById('modalTotal').textContent = totalStr;
+            document.getElementById('redeemCommand').textContent = currentCode;
             document.getElementById('payCommand').textContent = totalStr.toLowerCase();
             document.getElementById('checkoutModal').style.display = 'flex';
         }
@@ -432,7 +439,7 @@
         }
 
         function checkout() {
-            alert('Order placed! Run /pay server ' + formatTotal().toLowerCase() + ' in-game at meteorsmp.abrdns.com');
+            alert('Order placed! Run /redeem ' + currentCode + ' and /pay server ' + formatTotal().toLowerCase() + ' in-game at meteorsmp.abrdns.com');
             cart = [];
             updateCart();
             closeModal();
