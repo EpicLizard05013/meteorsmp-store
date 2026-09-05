@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeteorSMP - Store, Guide & Info</title>
+    <title>MeteorSMP - Corporate Headquarters & Lobby</title>
     <link rel="icon" type="image/png" sizes="64x64" href="server.icon.png">
-    <style>body {
-            background: #09090b;
-            color: #e4e4e7;
+    <style>
+        :root {
+            --bg-color: #090d16;
+            --lobby-floor: #111827;
+            --desk-bg: #1f2937;
+            --accent-gold: #fbbf24;
+            --accent-purple: #a855f7;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -16,27 +27,156 @@
             align-items: center;
             min-height: 100vh;
         }
-        .wrapper {
-            padding: 20px;
-            max-width: 1100px;
+        .lobby-wrapper {
+            padding: 30px 20px;
+            max-width: 1200px;
             width: 100%;
             box-sizing: border-box;
-            padding-bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        header {
+        /* Reception Desk / Main Entrance Header */
+        .reception-desk {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
-            margin: 20px 0 30px 0;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            margin-bottom: 35px;
+            position: relative;
         }
-        h1 {
+        .reception-desk h1 {
             color: #d8b4fe;
-            font-size: 3rem;
-            margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(216, 180, 254, 0.4);
+            font-size: 2.8rem;
+            margin: 0 0 8px 0;
+            text-shadow: 0 0 20px rgba(216, 180, 254, 0.3);
         }
-        .info-container {
+        .reception-desk p {
+            color: var(--text-muted);
+            margin: 0 0 20px 0;
+            font-size: 1.1rem;
+        }
+        .main-ip-badge {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            padding: 12px 24px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e9d5ff;
+        }
+        .btn {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn:hover { background: #6d28d9; transform: translateY(-1px); }
+        
+        /* Office Hallway / Department Layout */
+        .department-section {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .department-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+        .room-plaque {
+            background: #374151;
+            color: #fbbf24;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        .department-title {
+            font-size: 1.6rem;
+            margin: 0;
+            color: #f3f4f6;
+        }
+
+        /* Office Doors / Grid Cards */
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        .office-door {
+            background: var(--lobby-floor);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: border-color 0.2s;
+        }
+        .office-door:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+        .office-door h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        .office-door ul {
+            padding-left: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 12px;
+        }
+        .price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4ade80;
+        }
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: #7c3aed;
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Info & Guides Rooms */
+        .info-hall {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
@@ -44,144 +184,75 @@
             margin-bottom: 30px;
         }
         @media(max-width: 768px) {
-            .info-container { grid-template-columns: 1fr; }
+            .info-hall { grid-template-columns: 1fr; }
         }
-        .info-box {
-            background: #18181b;
+        .office-cubicle {
+            background: var(--lobby-floor);
             padding: 20px 25px;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-glass);
         }
-        .info-box h3 {
+        .office-cubicle h3 {
             margin-top: 0;
             color: #d8b4fe;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             padding-bottom: 8px;
         }
         code {
-            background: #27272a;
+            background: #111827;
             padding: 3px 6px;
             border-radius: 4px;
             color: #d8b4fe;
             font-family: monospace;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .section-title {
-            font-size: 1.8rem;
-            margin: 30px 0 20px 0;
-            text-align: center;
-            width: 100%;
-        }
-        .commands-grid {
+
+        /* Commands Directory Grid */
+        .commands-hall {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 12px;
             width: 100%;
-            margin-bottom: 30px;
         }
-        .command-card {
-            background: #18181b;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .command-badge-card {
+            background: var(--lobby-floor);
+            border: 1px solid var(--border-glass);
             border-radius: 8px;
             padding: 12px 15px;
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
-        .command-card code {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .command-card span {
-            font-size: 0.85rem;
-            color: #a1a1aa;
-        }
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-        }
-        .card {
-            background: #18181b;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            width: 260px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-        .card ul {
-            padding-left: 18px;
+        .command-badge-card code {
             font-size: 0.95rem;
-            line-height: 1.6;
-            color: #d4d4d8;
-        }
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 12px;
-        }
-        .price {
-            font-size: 1.2rem;
             font-weight: bold;
-            color: #e4e4e7;
         }
-        .btn {
-            background: #7c3aed;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
+        .command-badge-card span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
-        .btn:hover { background: #6d28d9; }
-        .badge {
-            position: absolute;
-            top: -10px;
-            right: 15px;
-            background: #7c3aed;
-            color: #fff;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-            text-transform: uppercase;
-        }
+
         /* Modal */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             align-items: center;
             justify-content: center;
             z-index: 100;
         }
         .modal-content {
-            background: #18181b;
-            border: 1px solid rgba(255,255,255,0.15);
+            background: #111827;
+            border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 12px;
             width: 90%;
             max-width: 480px;
             padding: 25px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         .close {
             position: absolute;
@@ -189,452 +260,452 @@
             right: 20px;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #a1a1aa;
-        }</style>
+            color: var(--text-muted);
+        }
+        .close:hover { color: #fff; }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 20px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <header>
-            <h1>MeteorSMP</h1>
-            <p>Official Store, Connection Hub & Player Guide</p>
-            <div style="margin-top: 12px;">
-                <span style="background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.4); color: #d8b4fe; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 500;">
-                    💡 Note: These Ranks/Items can be purchased by in-game money
-                </span>
+    <div class="lobby-wrapper">
+        <!-- RECEPTION DESK / FRONT ENTRANCE -->
+        <header class="reception-desk">
+            <h1>MeteorSMP Headquarters</h1>
+            <p>Welcome to corporate reception. Access server connections, departments, and services below.</p>
+            <div class="main-ip-badge">
+                <span>Main Entrance IP: <code>meteorsmp.abrdns.com</code></span>
+                <button class="btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="copyText('meteorsmp.abrdns.com')">Copy</button>
+            </div>
+            <div style="margin-top: 15px; font-size: 0.85rem; color: #a78bfa;">
+                💡 Notice: All store ranks and packages can also be acquired using in-game currency.
             </div>
         </header>
 
-        <!-- CONNECTION & DISCORD -->
-        <div class="info-container">
-            <div class="info-box">
-                <h3>Connection Info</h3>
-                <p style="margin-bottom: 10px;">
-                    <strong>Main IP:</strong> <code>meteorsmp.abrdns.com</code> 
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('meteorsmp.abrdns.com')">Copy</button>
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <strong>Backup IP:</strong> <code>ram-xs.tun.ply.gg</code> 
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('ram-xs.tun.ply.gg')">Copy</button>
-                </p>
-                <p style="margin: 0;">
-                    <strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('atoms-converters.tun.ply.gg')">Copy</button>
-                </p>
+        <!-- INFORMATION & DESK DIRECTORY -->
+        <div class="info-hall">
+            <div class="office-cubicle">
+                <h3>🚪 Reception & Connections</h3>
+                <p style="margin-bottom: 8px;"><strong>Main IP:</strong> <code>meteorsmp.abrdns.com</code> <button class="btn" style="padding: 2px 6px; font-size: 0.7rem;" onclick="copyText('meteorsmp.abrdns.com')">Copy</button></p>
+                <p style="margin-bottom: 8px;"><strong>Backup IP:</strong> <code>ram-xs.tun.ply.gg</code> <button class="btn" style="padding: 2px 6px; font-size: 0.7rem;" onclick="copyText('ram-xs.tun.ply.gg')">Copy</button></p>
+                <p style="margin: 0;"><strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
             </div>
-            <div class="info-box">
-                <h3>Community & Discord</h3>
-                <p>Join our community server to chat, trade, and stay updated on events!</p>
-                <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn" style="margin-top: 5px;">Join Discord Server</a>
+            <div class="office-cubicle">
+                <h3>💬 Community Lounge & Discord</h3>
+                <p>Visit our employee lounge to coordinate projects, trade items, and stay updated on corporate events.</p>
+                <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn" style="margin-top: 8px;">Access Discord Lounge</a>
             </div>
         </div>
 
-        <!-- HOW TO JOIN & MAKE MONEY -->
-        <div class="info-container">
-            <div class="info-box">
-                <h3>How to Join</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li>Open Minecraft (Java or Bedrock Edition).</li>
-                    <li>Navigate to <strong>Multiplayer</strong> and click <strong>Add Server</strong>.</li>
-                    <li>Enter either <code>meteorsmp.abrdns.com</code> or <code>ram-xs.tun.ply.gg</code>.</li>
-                    <li>Hit connect and jump straight into the survival world!</li>
+        <div class="info-hall">
+            <div class="office-cubicle">
+                <h3>📋 Onboarding Guide</h3>
+                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: var(--text-muted);">
+                    <li>Open Minecraft (Java or Bedrock).</li>
+                    <li>Go to <strong>Multiplayer</strong> &rarr; <strong>Add Server</strong>.</li>
+                    <li>Input server address <code>meteorsmp.abrdns.com</code>.</li>
+                    <li>Connect and enter the survival world!</li>
                 </ol>
             </div>
-            <div class="info-box">
-                <h3>How to Make Money</h3>
-                <ul style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Sell Items:</strong> Use <code>/sell</code> to quickly earn cash from gathered items.</li>
-                    <li><strong>Server Shop:</strong> Use <code>/shop</code> to buy and sell resources.</li>
-                    <li><strong>Crates & Keys:</strong> Open keys acquired via <code>/keys</code> for high-value rewards.</li>
-                    <li><strong>Player Economy:</strong> Trade rare items or services with others using <code>/pay</code>.</li>
+            <div class="office-cubicle">
+                <h3>📈 Financial Department (Making Money)</h3>
+                <ul style="margin: 0; padding-left: 18px; line-height: 1.6; color: var(--text-muted);">
+                    <li><strong>Sell Inventory:</strong> Run <code>/sell</code> for instant cash.</li>
+                    <li><strong>Corporate Shop:</strong> Use <code>/shop</code> to trade resources.</li>
+                    <li><strong>Treasury Crates:</strong> Open keys via <code>/keys</code>.</li>
+                    <li><strong>Peer Transfers:</strong> Use <code>/pay</code> to trade with colleagues.</li>
                 </ul>
             </div>
         </div>
 
-        <!-- GIFT GIVING GUIDE -->
-        <div class="info-container" style="grid-template-columns: 1fr;">
-            <div class="info-box">
-                <h3>How to Gift Friends</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Step 1:</strong> Select an item you want to give your friend from the store.</li>
-                    <li><strong>Step 2:</strong> Use <code>/gift-redeem &lt;code&gt; &lt;discount (optional)&gt; &lt;friend&gt;</code> in-game.</li>
-                    <li><strong>Step 3:</strong> Use <code>/pay server &lt;amount&gt;</code> to complete the purchase.</li>
-                    <li><strong>Step 4:</strong> Enjoy your items!</li>
-                </ol>
+        <!-- DEPARTMENT: SHARDS & TREASURY -->
+        <div class="department-section">
+            <div class="department-header">
+                <span class="room-plaque">SUITE 101</span>
+                <h2 class="department-title" style="color: #c084fc;">Treasury & Shards Office</h2>
             </div>
-        </div>
-
-        <!-- STORE REDEMPTION GUIDE -->
-        <div class="info-container" style="grid-template-columns: 1fr;">
-            <div class="info-box">
-                <h3>Store Redemption Guide</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Step 1:</strong> Select your item on the store, then run <code>/redeem &lt;code&gt;</code> in-game.</li>
-                    <li><strong>Step 2:</strong> Use <code>/pay server &lt;amount&gt;</code> to complete the in-game payment cost.</li>
-                    <li><strong>Step 3:</strong> Enjoy your rewards!</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- SERVER COMMANDS REFERENCE -->
-        <h2 class="section-title" style="color: #38bdf8;">Server Commands</h2>
-        <div class="commands-grid">
-            <div class="command-card">
-                <code>/gift-redeem</code>
-                <span>Send store purchases as gifts to friends</span>
-            </div>
-            <div class="command-card">
-                <code>/redeem</code>
-                <span>Redeem your store purchase code</span>
-            </div>
-            <div class="command-card">
-                <code>/rtp</code>
-                <span>Randomly teleport into the wild</span>
-            </div>
-            <div class="command-card">
-                <code>/baltop</code>
-                <span>View richest players on the server</span>
-            </div>
-            <div class="command-card">
-                <code>/pv</code>
-                <span>Open your player vaults</span>
-            </div>
-            <div class="command-card">
-                <code>/craft</code>
-                <span>Open a portable crafting table</span>
-            </div>
-            <div class="command-card">
-                <code>/home</code>
-                <span>Teleport to your set home</span>
-            </div>
-            <div class="command-card">
-                <code>/warp</code>
-                <span>View server warps and locations</span>
-            </div>
-            <div class="command-card">
-                <code>/tpa</code>
-                <span>Send a teleport request to a player</span>
-            </div>
-            <div class="command-card">
-                <code>/tpahere</code>
-                <span>Ask a player to teleport to you</span>
-            </div>
-            <div class="command-card">
-                <code>/keys</code>
-                <span>Check your available crate keys</span>
-            </div>
-            <div class="command-card">
-                <code>/pay</code>
-                <span>Transfer money to another player or server</span>
-            </div>
-            <div class="command-card">
-                <code>/bal</code>
-                <span>Check your current cash balance</span>
-            </div>
-            <div class="command-card">
-                <code>/shop</code>
-                <span>Open the main server shop menu</span>
-            </div>
-            <div class="command-card">
-                <code>/sell</code>
-                <span>Sell items directly from your inventory</span>
-            </div>
-            <div class="command-card">
-                <code>/kit</code>
-                <span>Claim your available rank or reward kits</span>
-            </div>
-            <div class="command-card">
-                <code>/settings</code>
-                <span>Open your personal player settings</span>
-            </div>
-        </div>
-
-        <!-- SERVER SHARDS SECTION -->
-        <h2 class="section-title" style="color: #c084fc;">Server Shards</h2>
-        <div class="grid">
-            <div class="card">
-                <div>
-                    <h2 style="color: #d8b4fe;">100 Shards</h2>
-                    <ul>
-                        <li>100x In-game Shards</li>
-                        <li>Starter shard pack</li>
-                    </ul>
+            <div class="office-grid">
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #d8b4fe;">100 Shards</h2>
+                        <ul>
+                            <li>100x In-game Shards</li>
+                            <li>Starter shard pack</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">7m</span>
+                        <button class="btn" onclick="openCheckout('100 Shards', '7m', 'SHARDS100')">Acquire</button>
+                    </div>
                 </div>
-                <div class="price-row">
-                    <span class="price">7m</span>
-                    <button class="btn" onclick="openCheckout('100 Shards', '7m', 'SHARDS100')">Buy Now</button>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #d8b4fe;">400 Shards</h2>
+                        <ul>
+                            <li>400x In-game Shards</li>
+                            <li>Upgrade gear & items</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">25m</span>
+                        <button class="btn" onclick="openCheckout('400 Shards', '25m', 'SHARDS400')">Acquire</button>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #d8b4fe;">400 Shards</h2>
-                    <ul>
-                        <li>400x In-game Shards</li>
-                        <li>Upgrade gear & items</li>
-                    </ul>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #d8b4fe;">1,500 Shards</h2>
+                        <ul>
+                            <li>1,500x In-game Shards</li>
+                            <li>Upgrade gear & items</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">100m</span>
+                        <button class="btn" onclick="openCheckout('1,500 Shards', '100m', 'SHARDS1500')">Acquire</button>
+                    </div>
                 </div>
-                <div class="price-row">
-                    <span class="price">25m</span>
-                    <button class="btn" onclick="openCheckout('400 Shards', '25m', 'SHARDS400')">Buy Now</button>
+                <div class="office-door">
+                    <div class="badge">+10%</div>
+                    <div>
+                        <h2 style="color: #d8b4fe;">3,000 Shards</h2>
+                        <ul>
+                            <li>3,000x In-game Shards</li>
+                            <li>Bonus value bundle</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">200m</span>
+                        <button class="btn" onclick="openCheckout('3,000 Shards', '200m', 'SHARDS3000')">Acquire</button>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #d8b4fe;">1,500 Shards</h2>
-                    <ul>
-                        <li>1,500x In-game Shards</li>
-                        <li>Upgrade gear & items</li>
-                    </ul>
+                <div class="office-door">
+                    <div class="badge">+20%</div>
+                    <div>
+                        <h2 style="color: #d8b4fe;">8,000 Shards</h2>
+                        <ul>
+                            <li>8,000x In-game Shards</li>
+                            <li>Maximum value bundle</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">500m</span>
+                        <button class="btn" onclick="openCheckout('8,000 Shards', '500m', 'SHARDS8000')">Acquire</button>
+                    </div>
                 </div>
-                <div class="price-row">
-                    <span class="price">100m</span>
-                    <button class="btn" onclick="openCheckout('1,500 Shards', '100m', 'SHARDS1500')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">+10%</div>
-                <div>
-                    <h2 style="color: #d8b4fe;">3,000 Shards</h2>
-                    <ul>
-                        <li>3,000x In-game Shards</li>
-                        <li>Bonus value bundle</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">200m</span>
-                    <button class="btn" onclick="openCheckout('3,000 Shards', '200m', 'SHARDS3000')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">+20%</div>
-                <div>
-                    <h2 style="color: #d8b4fe;">8,000 Shards</h2>
-                    <ul>
-                        <li>8,000x In-game Shards</li>
-                        <li>Maximum value bundle</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">500m</span>
-                    <button class="btn" onclick="openCheckout('8,000 Shards', '500m', 'SHARDS8000')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">+25%</div>
-                <div>
-                    <h2 style="color: #d8b4fe;">10,000 Shards</h2>
-                    <ul>
-                        <li>10,000x In-game Shards</li>
-                        <li>Ultimate Shards pack</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">600m</span>
-                    <button class="btn" onclick="openCheckout('10,000 Shards', '600m', 'SHARDS10000')">Buy Now</button>
+                <div class="office-door">
+                    <div class="badge">+25%</div>
+                    <div>
+                        <h2 style="color: #d8b4fe;">10,000 Shards</h2>
+                        <ul>
+                            <li>10,000x In-game Shards</li>
+                            <li>Ultimate Shards pack</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">600m</span>
+                        <button class="btn" onclick="openCheckout('10,000 Shards', '600m', 'SHARDS10000')">Acquire</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SERVER RANKS SECTION -->
-        <h2 class="section-title" style="color: #f472b6;">Server Ranks</h2>
-        <div class="grid">
-            <div class="card">
-                <div>
-                    <h2 style="color: #a78bfa;">Meteor</h2>
-                    <ul>
-                        <li>3 Homes</li>
-                        <li>10 Vaults (/PV)</li>
-                        <li>[Meteor] Prefix</li>
-                        <li><code>/kit meteor</code></li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">5b</span>
-                    <button class="btn" onclick="openCheckout('Meteor Rank', '5b', 'METEOR')">Buy Now</button>
-                </div>
+        <!-- DEPARTMENT: EXECUTIVE SUITES (RANKS) -->
+        <div class="department-section">
+            <div class="department-header">
+                <span class="room-plaque">SUITE 202</span>
+                <h2 class="department-title" style="color: #f472b6;">Executive Suites (Ranks)</h2>
             </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #f472b6;">Meteor+</h2>
-                    <ul>
-                        <li>4 Homes</li>
-                        <li>20 Vaults (/PV)</li>
-                        <li>[Meteor+] Prefix</li>
-                        <li><code>/kit meteor+</code></li>
-                    </ul>
+            <div class="office-grid">
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #a78bfa;">Meteor</h2>
+                        <ul>
+                            <li>3 Homes</li>
+                            <li>10 Vaults (/PV)</li>
+                            <li>[Meteor] Prefix</li>
+                            <li><code>/kit meteor</code></li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">5b</span>
+                        <button class="btn" onclick="openCheckout('Meteor Rank', '5b', 'METEOR')">Promote</button>
+                    </div>
                 </div>
-                <div class="price-row">
-                    <span class="price">15b</span>
-                    <button class="btn" onclick="openCheckout('Meteor+ Rank', '15b', 'METEORPLUS')">Buy Now</button>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #f472b6;">Meteor+</h2>
+                        <ul>
+                            <li>4 Homes</li>
+                            <li>20 Vaults (/PV)</li>
+                            <li>[Meteor+] Prefix</li>
+                            <li><code>/kit meteor+</code></li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">15b</span>
+                        <button class="btn" onclick="openCheckout('Meteor+ Rank', '15b', 'METEORPLUS')">Promote</button>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #fb7185;">Meteor++</h2>
-                    <ul>
-                        <li>5 Homes</li>
-                        <li>25 Vaults (/PV)</li>
-                        <li>[Meteor++] Prefix</li>
-                        <li><code>/kit meteor++</code></li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">25b</span>
-                    <button class="btn" onclick="openCheckout('Meteor++ Rank', '25b', 'METEORPLUSPLUS')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- CRATE KEYS & BUNDLES SECTION -->
-        <h2 class="section-title" style="color: #fbbf24;">Crate Keys & Bundles</h2>
-        <div class="grid">
-            <div class="card">
-                <div>
-                    <h2 style="color: #4ade80;">Common Keys</h2>
-                    <ul>
-                        <li>15x Common Keys Bundle</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">15m</span>
-                    <button class="btn" onclick="openCheckout('15x Common Keys', '15m', 'COMMON')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">Popular</div>
-                <div>
-                    <h2 style="color: #fbbf24;">Gold Keys</h2>
-                    <ul>
-                        <li>35x Gold Keys Bundle</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">150m</span>
-                    <button class="btn" onclick="openCheckout('35x Gold Keys', '150m', 'GOLD')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #38bdf8;">Prime Keys</h2>
-                    <ul>
-                        <li>5x Prime Keys Bundle</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">200m</span>
-                    <button class="btn" onclick="openCheckout('5x Prime Keys', '200m', 'PRIME')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #ff4545;">Crimson Key</h2>
-                    <ul>
-                        <li>1x Crimson Key</li>
-                        <li>1x Elytra</li>
-                        <li>High-tier rewards</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">500m</span>
-                    <button class="btn" onclick="openCheckout('Crimson Key & Elytra', '500m', 'CRIMSON')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #e879f9;">Amethyst Key</h2>
-                    <ul>
-                        <li>1x Amethyst Key</li>
-                        <li>Ultimate rewards</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">300m</span>
-                    <button class="btn" onclick="openCheckout('Amethyst Key', '300m', 'AMETHYST')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2 style="color: #f43f5e;">Crimson & Amethyst</h2>
-                    <ul>
-                        <li>5x Crimson Keys</li>
-                        <li>1x Amethyst Key</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">750m</span>
-                    <button class="btn" onclick="openCheckout('Crimson & Amethyst Bundle', '750m', 'BUNDLE')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">Combo</div>
-                <div>
-                    <h2 style="color: #fbbf24;">High-Tier Combo</h2>
-                    <ul>
-                        <li>15x Common, 35x Gold</li>
-                        <li>5x Crimson, 1x Amethyst</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">1500m</span>
-                    <button class="btn" onclick="openCheckout('High-Tier Combo', '1500m', 'COMBO')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">Global</div>
-                <div>
-                    <h2 style="color: #4ade80;">Common Keyall</h2>
-                    <ul>
-                        <li>50x Common Keyall</li>
-                        <li>Gives keys to everyone online!</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">150m</span>
-                    <button class="btn" onclick="openCheckout('50x Common Keyall', '150m', 'COMMONKEYALL')">Buy Now</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="badge">Global</div>
-                <div>
-                    <h2 style="color: #fbbf24;">Gold Keyall</h2>
-                    <ul>
-                        <li>35x Gold Keyall</li>
-                        <li>Gives keys to everyone online!</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price">350m</span>
-                    <button class="btn" onclick="openCheckout('35x Gold Keyall', '350m', 'GOLDKEYALL')">Buy Now</button>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #fb7185;">Meteor++</h2>
+                        <ul>
+                            <li>5 Homes</li>
+                            <li>25 Vaults (/PV)</li>
+                            <li>[Meteor++] Prefix</li>
+                            <li><code>/kit meteor++</code></li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">25b</span>
+                        <button class="btn" onclick="openCheckout('Meteor++ Rank', '25b', 'METEORPLUSPLUS')">Promote</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- CLEAN FOOTER -->
-        <footer style="margin-top: 50px; text-align: center; color: #71717a; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; width: 100%;">
-            <p style="margin: 0 0 6px 0;">MeteorSMP is not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
-            <p style="margin: 0;">&copy; 2026 MeteorSMP. All rights reserved.</p>
+        <!-- DEPARTMENT: SUPPLY DEPOT (KEYS & BUNDLES) -->
+        <div class="department-section">
+            <div class="department-header">
+                <span class="room-plaque">SUITE 303</span>
+                <h2 class="department-title" style="color: #fbbf24;">Supply Depot & Crate Keys</h2>
+            </div>
+            <div class="office-grid">
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #4ade80;">Common Keys</h2>
+                        <ul>
+                            <li>15x Common Keys Bundle</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">15m</span>
+                        <button class="btn" onclick="openCheckout('15x Common Keys', '15m', 'COMMON')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div class="badge">Popular</div>
+                    <div>
+                        <h2 style="color: #fbbf24;">Gold Keys</h2>
+                        <ul>
+                            <li>35x Gold Keys Bundle</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">150m</span>
+                        <button class="btn" onclick="openCheckout('35x Gold Keys', '150m', 'GOLD')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #38bdf8;">Prime Keys</h2>
+                        <ul>
+                            <li>5x Prime Keys Bundle</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">200m</span>
+                        <button class="btn" onclick="openCheckout('5x Prime Keys', '200m', 'PRIME')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #ff4545;">Crimson Key</h2>
+                        <ul>
+                            <li>1x Crimson Key</li>
+                            <li>1x Elytra</li>
+                            <li>High-tier rewards</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">500m</span>
+                        <button class="btn" onclick="openCheckout('Crimson Key & Elytra', '500m', 'CRIMSON')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #e879f9;">Amethyst Key</h2>
+                        <ul>
+                            <li>1x Amethyst Key</li>
+                            <li>Ultimate rewards</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">300m</span>
+                        <button class="btn" onclick="openCheckout('Amethyst Key', '300m', 'AMETHYST')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div>
+                        <h2 style="color: #f43f5e;">Crimson & Amethyst</h2>
+                        <ul>
+                            <li>5x Crimson Keys</li>
+                            <li>1x Amethyst Key</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">750m</span>
+                        <button class="btn" onclick="openCheckout('Crimson & Amethyst Bundle', '750m', 'BUNDLE')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div class="badge">Combo</div>
+                    <div>
+                        <h2 style="color: #fbbf24;">High-Tier Combo</h2>
+                        <ul>
+                            <li>15x Common, 35x Gold</li>
+                            <li>5x Crimson, 1x Amethyst</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">1500m</span>
+                        <button class="btn" onclick="openCheckout('High-Tier Combo', '1500m', 'COMBO')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div class="badge">Global</div>
+                    <div>
+                        <h2 style="color: #4ade80;">Common Keyall</h2>
+                        <ul>
+                            <li>50x Common Keyall</li>
+                            <li>Gives keys to everyone online!</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">150m</span>
+                        <button class="btn" onclick="openCheckout('50x Common Keyall', '150m', 'COMMONKEYALL')">Requisition</button>
+                    </div>
+                </div>
+                <div class="office-door">
+                    <div class="badge">Global</div>
+                    <div>
+                        <h2 style="color: #fbbf24;">Gold Keyall</h2>
+                        <ul>
+                            <li>35x Gold Keyall</li>
+                            <li>Gives keys to everyone online!</li>
+                        </ul>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">350m</span>
+                        <button class="btn" onclick="openCheckout('35x Gold Keyall', '350m', 'GOLDKEYALL')">Requisition</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEPARTMENT: OPERATIONS & COMMANDS -->
+        <div class="department-section">
+            <div class="department-header">
+                <span class="room-plaque">SUITE 404</span>
+                <h2 class="department-title" style="color: #38bdf8;">Operations & Command Directory</h2>
+            </div>
+            <div class="commands-hall">
+                <div class="command-badge-card">
+                    <code>/gift-redeem</code>
+                    <span>Send store purchases as gifts</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/redeem</code>
+                    <span>Redeem store purchase code</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/rtp</code>
+                    <span>Random teleport to wild</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/baltop</code>
+                    <span>Richest players registry</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/pv</code>
+                    <span>Open player vaults</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/craft</code>
+                    <span>Portable crafting bench</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/home</code>
+                    <span>Teleport to set home</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/warp</code>
+                    <span>Server locations directory</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/tpa</code>
+                    <span>Teleport request to player</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/tpahere</code>
+                    <span>Request player to you</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/keys</code>
+                    <span>Check available crate keys</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/pay</code>
+                    <span>Transfer funds or pay server</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/bal</code>
+                    <span>Check cash balance</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/shop</code>
+                    <span>Open server shop menu</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/sell</code>
+                    <span>Sell inventory items</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/kit</code>
+                    <span>Claim rank or reward kits</span>
+                </div>
+                <div class="command-badge-card">
+                    <code>/settings</code>
+                    <span>Personal player settings</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CORPORATE FOOTER -->
+        <footer>
+            <p style="margin: 0 0 6px 0;">MeteorSMP is an independent entity and is not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+            <p style="margin: 0;">&copy; 2026 MeteorSMP Headquarters. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for Requisitions / Checkout -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalItemName" style="color: #d8b4fe; margin-top:0;">Checkout</h2>
+            <h2 id="modalItemName" style="color: #d8b4fe; margin-top:0;">Requisition Checkout</h2>
             <div style="display:flex; justify-content:space-between; margin: 15px 0; font-weight:bold;">
-                <span>Price:</span>
+                <span>Cost:</span>
                 <span id="modalPrice" style="color: #4ade80;">0m</span>
             </div>
-            <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="background: #1f2937; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redeem Instruction:</p>
+                    <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redemption Protocol:</p>
                     <code>/redeem <span id="redeemCommand">PREFIX-0000</span></code>
                 </div>
                 <button class="btn" style="padding: 5px 10px; font-size: 0.8rem;" onclick="copyRedeem()">Copy</button>
             </div>
-            <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="background: #1f2937; padding: 12px; border-radius: 6px; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">2. In-Game Payment Instruction:</p>
+                    <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">2. Treasury Payment Protocol:</p>
                     <code>/pay server <span id="payCommand">0m</span></code>
                 </div>
                 <button class="btn" style="padding: 5px 10px; font-size: 0.8rem;" onclick="copyPay()">Copy</button>
@@ -650,7 +721,7 @@
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Copied to clipboard: ' + text);
-            }).catch(err => {
+            }).catch(() => {
                 alert('Failed to copy to clipboard.');
             });
         }
@@ -691,7 +762,7 @@
             navigator.clipboard.writeText(instructions).then(() => {
                 alert('Copied instructions to clipboard!\nRun in-game at meteorsmp.abrdns.com:\n\n/redeem ' + currentCode + '\n/pay server ' + currentPrice);
                 closeModal();
-            }).catch(err => {
+            }).catch(() => {
                 alert('Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
                 closeModal();
             });
