@@ -241,15 +241,14 @@
             </div>
         </div>
 
-        <!-- HOW TO DONATE ITEMS TO FRIENDS -->
+        <!-- STORE REDEMPTION GUIDE -->
         <div class="info-container" style="grid-template-columns: 1fr;">
             <div class="info-box">
-                <h3>How to Donate Items to Friends</h3>
+                <h3>Store Redemption Guide</h3>
                 <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Meet Up with Your Friend:</strong> Use <code>/tpa &lt;player&gt;</code> to send a teleport request to your friend, or use <code>/tpahere &lt;player&gt;</code> to bring them directly to your location.</li>
-                    <li><strong>Prepare Your Inventory:</strong> Gather the items, blocks, or gear you want to give away. If your items are stored safely away, use <code>/pv</code> to access your player vaults.</li>
-                    <li><strong>Transfer the Items:</strong> Drop the items securely on the ground right next to your friend so they can pick them up.</li>
-                    <li><strong>Send Money Support (Optional):</strong> If you also want to donate cash alongside your items, use the <code>/pay &lt;player&gt; &lt;amount&gt;</code> command.</li>
+                    <li><strong>Step 1:</strong> Select your item on the store, then run <code>/redeem &lt;code&gt;</code> in-game.</li>
+                    <li><strong>Step 2:</strong> Use <code>/pay server &lt;amount&gt;</code> to complete the in-game payment cost.</li>
+                    <li><strong>Step 3:</strong> Enjoy your rewards!</li>
                 </ol>
             </div>
         </div>
@@ -257,6 +256,18 @@
         <!-- SERVER COMMANDS REFERENCE -->
         <h2 class="section-title" style="color: #38bdf8;">Server Commands</h2>
         <div class="commands-grid">
+            <div class="command-card">
+                <code>/redeem</code>
+                <span>Redeem your store purchase code</span>
+            </div>
+            <div class="command-card">
+                <code>/rtp</code>
+                <span>Randomly teleport into the wild</span>
+            </div>
+            <div class="command-card">
+                <code>/baltop</code>
+                <span>View richest players on the server</span>
+            </div>
             <div class="command-card">
                 <code>/pv</code>
                 <span>Open your player vaults</span>
@@ -287,19 +298,11 @@
             </div>
             <div class="command-card">
                 <code>/pay</code>
-                <span>Transfer money to another player</span>
+                <span>Transfer money to another player or server</span>
             </div>
             <div class="command-card">
                 <code>/bal</code>
                 <span>Check your current cash balance</span>
-            </div>
-            <div class="command-card">
-                <code>/baltop</code>
-                <span>View the richest players on the server</span>
-            </div>
-            <div class="command-card">
-                <code>/leaderboard</code>
-                <span>View server leaderboards and stats</span>
             </div>
             <div class="command-card">
                 <code>/shop</code>
@@ -314,16 +317,8 @@
                 <span>Claim your available rank or reward kits</span>
             </div>
             <div class="command-card">
-                <code>/rtpqueue</code>
-                <span>Rtpqueue for PvP on RTP</span>
-            </div>
-            <div class="command-card">
                 <code>/settings</code>
                 <span>Open your personal player settings</span>
-            </div>
-            <div class="command-card">
-                <code>/store</code>
-                <span>Quick link to open the web store</span>
             </div>
         </div>
 
@@ -577,7 +572,7 @@
                 <span id="modalPrice" style="color: #4ade80;">0m</span>
             </div>
             <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 10px;">
-                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redeem Code Instruction:</p>
+                <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redeem Instruction:</p>
                 <code>/redeem <span id="redeemCommand">PREFIX-0000</span></code>
             </div>
             <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem;">
