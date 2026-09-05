@@ -265,7 +265,7 @@
         </div>
 
         <!-- FALSE POSITIVE PING WARNING NOTE -->
-        <div style="width: 100%; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px 20px; border-radius: 12px; margin-bottom: 40px; color: #fbbf24; font-size: 0.95kr; text-align: center;">
+        <div style="width: 100%; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px 20px; border-radius: 12px; margin-bottom: 40px; color: #fbbf24; font-size: 0.95rem; text-align: center;">
             ⚠️ <strong>Important Note:</strong> If you use that IP and it says <em>"Cannot connect to server"</em> (or displays offline in your server list), that is completely false! Just press join and you will connect straight in.
         </div>
 
@@ -461,7 +461,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">600m</span>
-                    <button class="btn" onclick="openCheckout('10,000 Shards', '600m', 'SHARDS10000')">Buy Now</button>
+                    <button class="btn" onclick="openCheckout('10000 Shards', '600m', 'SHARDS10000')">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -675,23 +675,23 @@
     </div>
 
     <script>
-        // Fetch status using mcstatus / mcsrvstat API
-        fetch('https://api.mcsrvstat.us/v2/meteorsmp.abrdns.com')
+        // Fetch live server status and player count from mcstatus.io API
+        fetch('https://api.mcstatus.io/v2/status/java/meteorsmp.abrdns.com')
             .then(response => response.json())
             .then(data => {
                 const statusEl = document.getElementById('server-status');
-                if (data.online) {
-                    statusEl.textContent = 'Up';
+                if (data && data.online === true) {
+                    statusEl.textContent = `Online (${data.players.online}/${data.players.max})`;
                     statusEl.style.color = '#4ade80';
                 } else {
-                    statusEl.textContent = 'Down';
+                    statusEl.textContent = 'Offline';
                     statusEl.style.color = '#ef4444';
                 }
             })
             .catch(() => {
                 const statusEl = document.getElementById('server-status');
-                statusEl.textContent = 'Up';
-                statusEl.style.color = '#4ade80';
+                statusEl.textContent = 'Offline';
+                statusEl.style.color = '#ef4444';
             });
 
         let currentCode = '';
