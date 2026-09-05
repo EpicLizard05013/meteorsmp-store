@@ -109,12 +109,6 @@
             transition: background 0.2s;
         }
         .btn:hover { background: #6d28d9; }
-        .btn-disabled {
-            background: #27272a;
-            color: #71717a;
-            cursor: not-allowed;
-            font-size: 0.85rem;
-        }
         .badge {
             position: absolute;
             top: -10px;
@@ -216,7 +210,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">5b</span>
-                    <button class="btn" onclick="addToCart('Meteor Rank', 5, 'b')">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Meteor Rank', 5, 'b', 'METEOR')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -231,7 +225,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">15b</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn" onclick="addToCart('Meteor+ Rank', 15, 'b', 'METEORPLUS')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -246,7 +240,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">25b</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn" onclick="addToCart('Meteor++ Rank', 25, 'b', 'METEORPLUSPLUS')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -262,7 +256,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">15m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn" onclick="addToCart('15x Common Keys', 15, 'm', 'COMMON')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -274,8 +268,8 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">100m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <span class="price">150m</span>
+                    <button class="btn" onclick="addToCart('35x Gold Keys', 150, 'm', 'GOLD')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -286,8 +280,8 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">250m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <span class="price">200m</span>
+                    <button class="btn" onclick="addToCart('5x Prime Keys', 200, 'm', 'PRIME')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -301,7 +295,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">500m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn" onclick="addToCart('Crimson Key & Elytra', 500, 'm', 'CRIMSON')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -313,8 +307,8 @@
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">450m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <span class="price">300m</span>
+                    <button class="btn" onclick="addToCart('Amethyst Key', 300, 'm', 'AMETHYST')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -327,7 +321,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">750m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <button class="btn" onclick="addToCart('Crimson & Amethyst Bundle', 750, 'm', 'BUNDLE')">Add to Cart</button>
                 </div>
             </div>
             <div class="card">
@@ -335,15 +329,13 @@
                 <div>
                     <h2 style="color: #fbbf24;">High-Tier Combo</h2>
                     <ul>
-                        <li>15x Common Keys</li>
-                        <li>35x Gold Keys</li>
-                        <li>5x Crimson Keys</li>
-                        <li>1x Amethyst Key</li>
+                        <li>15x Common, 35x Gold</li>
+                        <li>5x Crimson, 1x Amethyst</li>
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">865m</span>
-                    <button class="btn btn-disabled">Coming Soon</button>
+                    <span class="price">1500m</span>
+                    <button class="btn" onclick="addToCart('High-Tier Combo', 1500, 'm', 'COMBO')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -382,8 +374,8 @@
         let cart = [];
         let currentCode = '';
 
-        function addToCart(name, price, unit) {
-            cart.push({ name, price, unit });
+        function addToCart(name, price, unit, prefix) {
+            cart.push({ name, price, unit, prefix });
             updateCart();
         }
 
@@ -427,8 +419,12 @@
                     </div>
                 `;
             });
+            
+            // Use the prefix of the first item in cart or default to METEOR
+            let primaryPrefix = cart[0].prefix || 'METEOR';
             const randomNum = Math.floor(1000 + Math.random() * 9000);
-            currentCode = 'METEOR-' + randomNum;
+            currentCode = primaryPrefix + '-' + randomNum;
+            
             let totalStr = formatTotal();
             document.getElementById('modalTotal').textContent = totalStr;
             document.getElementById('redeemCommand').textContent = currentCode;
