@@ -209,8 +209,18 @@
         <div class="info-container">
             <div class="info-box">
                 <h3>Connection Info</h3>
-                <p><strong>Server IPs:</strong> <code>meteorsmp.abrdns.com</code> or <code>ram-xs.tun.ply.gg</code></p>
-                <p><strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)</p>
+                <p style="margin-bottom: 10px;">
+                    <strong>Main IP:</strong> <code>meteorsmp.abrdns.com</code> 
+                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('meteorsmp.abrdns.com')">Copy</button>
+                </p>
+                <p style="margin-bottom: 10px;">
+                    <strong>Backup IP:</strong> <code>ram-xs.tun.ply.gg</code> 
+                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('ram-xs.tun.ply.gg')">Copy</button>
+                </p>
+                <p style="margin: 0;">
+                    <strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)
+                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('atoms-converters.tun.ply.gg')">Copy</button>
+                </p>
             </div>
             <div class="info-box">
                 <h3>Community & Discord</h3>
@@ -604,6 +614,14 @@
         let currentCode = '';
         let currentPrice = '';
 
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            }).catch(err => {
+                alert('Failed to copy to clipboard.');
+            });
+        }
+
         function openCheckout(name, price, prefix) {
             document.getElementById('modalItemName').textContent = name;
             document.getElementById('modalPrice').textContent = price;
@@ -622,8 +640,14 @@
         }
 
         function checkout() {
-            alert('Ready! Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
-            closeModal();
+            const instructions = `/redeem ${currentCode}\n/pay server ${currentPrice}`;
+            navigator.clipboard.writeText(instructions).then(() => {
+                alert('Copied instructions to clipboard!\nRun in-game at meteorsmp.abrdns.com:\n\n/redeem ' + currentCode + '\n/pay server ' + currentPrice);
+                closeModal();
+            }).catch(err => {
+                alert('Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
+                closeModal();
+            });
         }
 
         window.onclick = e => { if(e.target == document.getElementById('checkoutModal')) closeModal(); }
