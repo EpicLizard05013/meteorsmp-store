@@ -21,7 +21,7 @@
             max-width: 1100px;
             width: 100%;
             box-sizing: border-box;
-            padding-bottom: 120px;
+            padding-bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -120,23 +120,6 @@
             border-radius: 10px;
             text-transform: uppercase;
         }
-        /* Cart Bar */
-        .cart-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #18181b;
-            border: 1px solid rgba(167, 139, 250, 0.4);
-            padding: 12px 25px;
-            border-radius: 30px;
-            display: none;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            z-index: 90;
-            cursor: pointer;
-        }
         /* Modal */
         .modal {
             display: none;
@@ -152,7 +135,7 @@
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 12px;
             width: 90%;
-            max-width: 500px;
+            max-width: 450px;
             padding: 25px;
             position: relative;
         }
@@ -163,23 +146,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #a1a1aa;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #27272a;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-        .remove-btn {
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            padding: 2px 6px;
-            border-radius: 4px;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -210,7 +176,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">5b</span>
-                    <button class="btn" onclick="addToCart('Meteor Rank', 5, 'b', 'METEOR')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Meteor Rank', '5b', 'METEOR')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -225,7 +191,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">15b</span>
-                    <button class="btn" onclick="addToCart('Meteor+ Rank', 15, 'b', 'METEORPLUS')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Meteor+ Rank', '15b', 'METEORPLUS')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -240,7 +206,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">25b</span>
-                    <button class="btn" onclick="addToCart('Meteor++ Rank', 25, 'b', 'METEORPLUSPLUS')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Meteor++ Rank', '25b', 'METEORPLUSPLUS')">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -256,7 +222,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">15m</span>
-                    <button class="btn" onclick="addToCart('15x Common Keys', 15, 'm', 'COMMON')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('15x Common Keys', '15m', 'COMMON')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -269,7 +235,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">150m</span>
-                    <button class="btn" onclick="addToCart('35x Gold Keys', 150, 'm', 'GOLD')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('35x Gold Keys', '150m', 'GOLD')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -281,7 +247,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">200m</span>
-                    <button class="btn" onclick="addToCart('5x Prime Keys', 200, 'm', 'PRIME')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('5x Prime Keys', '200m', 'PRIME')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -295,7 +261,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">500m</span>
-                    <button class="btn" onclick="addToCart('Crimson Key & Elytra', 500, 'm', 'CRIMSON')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Crimson Key & Elytra', '500m', 'CRIMSON')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -308,7 +274,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">300m</span>
-                    <button class="btn" onclick="addToCart('Amethyst Key', 300, 'm', 'AMETHYST')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Amethyst Key', '300m', 'AMETHYST')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -321,7 +287,7 @@
                 </div>
                 <div class="price-row">
                     <span class="price">750m</span>
-                    <button class="btn" onclick="addToCart('Crimson & Amethyst Bundle', 750, 'm', 'BUNDLE')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('Crimson & Amethyst Bundle', '750m', 'BUNDLE')">Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -335,100 +301,47 @@
                 </div>
                 <div class="price-row">
                     <span class="price">1500m</span>
-                    <button class="btn" onclick="addToCart('High-Tier Combo', 1500, 'm', 'COMBO')">Add to Cart</button>
+                    <button class="btn" onclick="openCheckout('High-Tier Combo', '1500m', 'COMBO')">Buy Now</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Cart Floating Bar -->
-    <div id="cartBar" class="cart-bar" onclick="openModal()">
-        <span>🛒 Cart (<span id="cartCount">0</span>)</span>
-        <span id="cartTotal" style="color: #4ade80; font-weight: bold;">0m</span>
-        <button class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Checkout »</button>
     </div>
 
     <!-- Modal -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="color: #d8b4fe; margin-top:0;">Your Cart</h2>
-            <div id="cartItemsList"></div>
+            <h2 id="modalItemName" style="color: #d8b4fe; margin-top:0;">Checkout</h2>
             <div style="display:flex; justify-content:space-between; margin: 15px 0; font-weight:bold;">
-                <span>Total:</span>
-                <span id="modalTotal" style="color: #4ade80;">0m</span>
+                <span>Price:</span>
+                <span id="modalPrice" style="color: #4ade80;">0m</span>
             </div>
             <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 10px;">
                 <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">1. Redeem Code Instruction:</p>
-                <code>/redeem <span id="redeemCommand">METEOR-9595</span></code>
+                <code>/redeem <span id="redeemCommand">PREFIX-0000</span></code>
             </div>
             <div style="background: #27272a; padding: 12px; border-radius: 6px; font-size: 0.9rem;">
                 <p style="margin:0 0 5px 0; color:#d8b4fe; font-weight:bold;">2. In-Game Payment Instruction:</p>
                 <code>/pay server <span id="payCommand">0m</span></code>
             </div>
-            <button class="btn" style="width:100%; margin-top:15px; padding:10px;" onclick="checkout()">Complete Order</button>
+            <button class="btn" style="width:100%; margin-top:15px; padding:10px;" onclick="checkout()">Copy Instructions</button>
         </div>
     </div>
 
     <script>
-        let cart = [];
         let currentCode = '';
+        let currentPrice = '';
 
-        function addToCart(name, price, unit, prefix) {
-            cart.push({ name, price, unit, prefix });
-            updateCart();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-            if(cart.length === 0) closeModal();
-        }
-
-        function updateCart() {
-            const bar = document.getElementById('cartBar');
-            document.getElementById('cartCount').textContent = cart.length;
-            document.getElementById('cartTotal').textContent = formatTotal();
-            bar.style.display = cart.length > 0 ? 'flex' : 'none';
-        }
-
-        function formatTotal() {
-            let b = 0, m = 0;
-            cart.forEach(item => {
-                if(item.unit === 'b') b += item.price;
-                if(item.unit === 'm') m += item.price;
-            });
-            let res = [];
-            if(b > 0) res.push(b + 'b');
-            if(m > 0) res.push(m + 'm');
-            return res.join(' + ') || '0m';
-        }
-
-        function openModal() {
-            if(cart.length === 0) return;
-            let list = document.getElementById('cartItemsList');
-            list.innerHTML = '';
-            cart.forEach((item, index) => {
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <div>
-                            <span style="color:#4ade80; margin-right:10px;">${item.price}${item.unit}</span>
-                            <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
-                        </div>
-                    </div>
-                `;
-            });
+        function openCheckout(name, price, prefix) {
+            document.getElementById('modalItemName').textContent = name;
+            document.getElementById('modalPrice').textContent = price;
             
-            // Use the prefix of the first item in cart or default to METEOR
-            let primaryPrefix = cart[0].prefix || 'METEOR';
             const randomNum = Math.floor(1000 + Math.random() * 9000);
-            currentCode = primaryPrefix + '-' + randomNum;
+            currentCode = prefix + '-' + randomNum;
+            currentPrice = price.toLowerCase();
             
-            let totalStr = formatTotal();
-            document.getElementById('modalTotal').textContent = totalStr;
             document.getElementById('redeemCommand').textContent = currentCode;
-            document.getElementById('payCommand').textContent = totalStr.toLowerCase();
+            document.getElementById('payCommand').textContent = currentPrice;
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
@@ -437,9 +350,7 @@
         }
 
         function checkout() {
-            alert('Order placed! Run /redeem ' + currentCode + ' and /pay server ' + formatTotal().toLowerCase() + ' in-game at meteorsmp.abrdns.com');
-            cart = [];
-            updateCart();
+            alert('Ready! Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
             closeModal();
         }
 
