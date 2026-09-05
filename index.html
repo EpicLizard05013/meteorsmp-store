@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeteorSMP - Store, Guide & Info</title>
+    <title>MeteorSMP - Hub & Store</title>
     <link rel="icon" type="image/png" sizes="64x64" href="server.icon.png">
-    <style>body {
+    <style>
+        body {
             background: #09090b;
             color: #e4e4e7;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,8 +18,8 @@
             min-height: 100vh;
         }
         .wrapper {
-            padding: 20px;
-            max-width: 1100px;
+            padding: 30px 20px;
+            max-width: 1200px;
             width: 100%;
             box-sizing: border-box;
             padding-bottom: 60px;
@@ -28,37 +29,60 @@
         }
         header {
             text-align: center;
-            margin: 20px 0 30px 0;
+            margin-bottom: 30px;
         }
         h1 {
             color: #d8b4fe;
             font-size: 3rem;
             margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(216, 180, 254, 0.4);
+            text-shadow: 0 0 20px rgba(216, 180, 254, 0.4);
         }
-        .info-container {
+        /* Dashboard Grid Layout inspired by modern server hubs */
+        .hub-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
-        @media(max-width: 768px) {
-            .info-container { grid-template-columns: 1fr; }
+        @media(max-width: 900px) {
+            .hub-grid { grid-template-columns: 1fr; }
         }
-        .info-box {
-            background: #18181b;
-            padding: 20px 25px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .hub-card {
+            background: linear-gradient(145deg, #18181b, #121215);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .info-box h3 {
+        .hub-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+        .hub-card h3 {
             margin-top: 0;
             color: #d8b4fe;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding-bottom: 8px;
+            padding-bottom: 10px;
+        }
+        .brand-tile {
+            background: linear-gradient(135deg, #7c3aed, #4c1d95);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            color: #fff;
+        }
+        .brand-tile h2 {
+            font-size: 2.2rem;
+            margin: 10px 0 5px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         code {
             background: #27272a;
@@ -69,13 +93,14 @@
         }
         .section-title {
             font-size: 1.8rem;
-            margin: 30px 0 20px 0;
+            margin: 40px 0 20px 0;
             text-align: center;
             width: 100%;
+            font-weight: 700;
         }
         .commands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 12px;
             width: 100%;
             margin-bottom: 30px;
@@ -83,11 +108,11 @@
         .command-card {
             background: #18181b;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 12px 15px;
+            border-radius: 10px;
+            padding: 14px 16px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
         .command-card code {
             font-size: 1rem;
@@ -137,7 +162,7 @@
         .price {
             font-size: 1.2rem;
             font-weight: bold;
-            color: #e4e4e7;
+            color: #4ade80;
         }
         .btn {
             background: #7c3aed;
@@ -147,12 +172,12 @@
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
             text-decoration: none;
             display: inline-block;
             text-align: center;
         }
-        .btn:hover { background: #6d28d9; }
+        .btn:hover { background: #6d28d9; transform: translateY(-1px); }
         .badge {
             position: absolute;
             top: -10px;
@@ -163,6 +188,7 @@
             padding: 3px 8px;
             border-radius: 10px;
             text-transform: uppercase;
+            font-weight: bold;
         }
         /* Modal */
         .modal {
@@ -182,6 +208,7 @@
             max-width: 480px;
             padding: 25px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
         .close {
             position: absolute;
@@ -190,7 +217,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #a1a1aa;
-        }</style>
+        }
+    </style>
 </head>
 <body>
 
@@ -200,78 +228,79 @@
             <p>Official Store, Connection Hub & Player Guide</p>
             <div style="margin-top: 12px;">
                 <span style="background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.4); color: #d8b4fe; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 500;">
-                    💡 Note: These Ranks/Items can be purchased by in-game money
+                    💡 Note: Ranks and items can be purchased using in-game currency
                 </span>
             </div>
         </header>
 
-        <!-- CONNECTION & DISCORD -->
-        <div class="info-container">
-            <div class="info-box">
+        <!-- HUB DASHBOARD GRID (Inspired by Network Landing Pages) -->
+        <div class="hub-grid">
+            <!-- Brand / Quick IP Tile -->
+            <div class="hub-card brand-tile">
+                <span style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Main Server IP</span>
+                <h2>meteorsmp.abrdns.com</h2>
+                <button class="btn" style="background: #ffffff; color: #7c3aed; margin-top: 10px;" onclick="copyText('meteorsmp.abrdns.com')">Copy IP Address</button>
+            </div>
+
+            <!-- Connection Info Card -->
+            <div class="hub-card">
                 <h3>Connection Info</h3>
-                <p style="margin-bottom: 10px;">
-                    <strong>Main IP:</strong> <code>meteorsmp.abrdns.com</code> 
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('meteorsmp.abrdns.com')">Copy</button>
+                <p style="margin-bottom: 8px; font-size: 0.9rem;">
+                    <strong>Backup IP:</strong><br><code>ram-xs.tun.ply.gg</code>
+                    <button class="btn" style="padding: 2px 6px; font-size: 0.7rem; float: right;" onclick="copyText('ram-xs.tun.ply.gg')">Copy</button>
                 </p>
-                <p style="margin-bottom: 10px;">
-                    <strong>Backup IP:</strong> <code>ram-xs.tun.ply.gg</code> 
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('ram-xs.tun.ply.gg')">Copy</button>
-                </p>
-                <p style="margin: 0;">
-                    <strong>Bedrock IP:</strong> <code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)
-                    <button class="btn" style="padding: 3px 8px; font-size: 0.75rem; margin-left: 6px;" onclick="copyText('atoms-converters.tun.ply.gg')">Copy</button>
+                <p style="margin: 0; font-size: 0.9rem;">
+                    <strong>Bedrock IP:</strong><br><code>atoms-converters.tun.ply.gg</code> (Port: <strong>59877</strong>)
+                    <button class="btn" style="padding: 2px 6px; font-size: 0.7rem; float: right;" onclick="copyText('atoms-converters.tun.ply.gg')">Copy</button>
                 </p>
             </div>
-            <div class="info-box">
-                <h3>Community & Discord</h3>
-                <p>Join our community server to chat, trade, and stay updated on events!</p>
-                <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn" style="margin-top: 5px;">Join Discord Server</a>
+
+            <!-- Discord Community Card -->
+            <div class="hub-card" style="justify-content: center; text-align: center;">
+                <h3 style="border: none; margin-bottom: 5px;">Discord Community</h3>
+                <p style="color: #a1a1aa; font-size: 0.9rem; margin-bottom: 15px;">Join our community server to chat, trade, and stay updated on events!</p>
+                <a href="https://discord.gg/8a8yBhjUk" target="_blank" class="btn">Join Discord Server</a>
             </div>
         </div>
 
         <!-- HOW TO JOIN & MAKE MONEY -->
-        <div class="info-container">
-            <div class="info-box">
+        <div class="hub-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 40px;">
+            <div class="hub-card">
                 <h3>How to Join</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
+                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8; font-size: 0.95rem;">
                     <li>Open Minecraft (Java or Bedrock Edition).</li>
                     <li>Navigate to <strong>Multiplayer</strong> and click <strong>Add Server</strong>.</li>
-                    <li>Enter either <code>meteorsmp.abrdns.com</code> or <code>ram-xs.tun.ply.gg</code>.</li>
+                    <li>Enter <code>meteorsmp.abrdns.com</code>.</li>
                     <li>Hit connect and jump straight into the survival world!</li>
                 </ol>
             </div>
-            <div class="info-box">
+            <div class="hub-card">
                 <h3>How to Make Money</h3>
-                <ul style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
+                <ul style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8; font-size: 0.95rem;">
                     <li><strong>Sell Items:</strong> Use <code>/sell</code> to quickly earn cash from gathered items.</li>
                     <li><strong>Server Shop:</strong> Use <code>/shop</code> to buy and sell resources.</li>
                     <li><strong>Crates & Keys:</strong> Open keys acquired via <code>/keys</code> for high-value rewards.</li>
-                    <li><strong>Player Economy:</strong> Trade rare items or services with others using <code>/pay</code>.</li>
+                    <li><strong>Player Economy:</strong> Trade rare items or services using <code>/pay</code>.</li>
                 </ul>
             </div>
         </div>
 
-        <!-- GIFT GIVING GUIDE -->
-        <div class="info-container" style="grid-template-columns: 1fr;">
-            <div class="info-box">
-                <h3>How to Gift Friends</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Step 1:</strong> Select an item you want to give your friend from the store.</li>
-                    <li><strong>Step 2:</strong> Use <code>/gift-redeem &lt;code&gt; &lt;discount (optional)&gt; &lt;friend&gt;</code> in-game.</li>
-                    <li><strong>Step 3:</strong> Use <code>/pay server &lt;amount&gt;</code> to complete the purchase.</li>
-                    <li><strong>Step 4:</strong> Enjoy your items!</li>
+        <!-- GUIDES SECTION -->
+        <div class="hub-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 40px;">
+            <div class="hub-card">
+                <h3>Store Redemption Guide</h3>
+                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8; font-size: 0.95rem;">
+                    <li>Select your item on the store, then run <code>/redeem &lt;code&gt;</code> in-game.</li>
+                    <li>Use <code>/pay server &lt;amount&gt;</code> to complete the in-game payment cost.</li>
+                    <li>Enjoy your rewards!</li>
                 </ol>
             </div>
-        </div>
-
-        <!-- STORE REDEMPTION GUIDE -->
-        <div class="info-container" style="grid-template-columns: 1fr;">
-            <div class="info-box">
-                <h3>Store Redemption Guide</h3>
-                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8;">
-                    <li><strong>Step 1:</strong> Select your item on the store, then run <code>/redeem &lt;code&gt;</code> in-game.</li>
-                    <li><strong>Step 2:</strong> Use <code>/pay server &lt;amount&gt;</code> to complete the in-game payment cost.</li>
-                    <li><strong>Step 3:</strong> Enjoy your rewards!</li>
+            <div class="hub-card">
+                <h3>How to Gift Friends</h3>
+                <ol style="margin: 0; padding-left: 18px; line-height: 1.6; color: #d4d4d8; font-size: 0.95rem;">
+                    <li>Select an item you want to gift your friend from the store.</li>
+                    <li>Use <code>/gift-redeem &lt;code&gt; &lt;discount&gt; &lt;friend&gt;</code> in-game.</li>
+                    <li>Use <code>/pay server &lt;amount&gt;</code> to complete the purchase.</li>
                 </ol>
             </div>
         </div>
@@ -342,10 +371,6 @@
             <div class="command-card">
                 <code>/kit</code>
                 <span>Claim your available rank or reward kits</span>
-            </div>
-            <div class="command-card">
-                <code>/settings</code>
-                <span>Open your personal player settings</span>
             </div>
         </div>
 
@@ -609,7 +634,7 @@
             </div>
         </div>
 
-        <!-- CLEAN FOOTER -->
+        <!-- FOOTER -->
         <footer style="margin-top: 50px; text-align: center; color: #71717a; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; width: 100%;">
             <p style="margin: 0 0 6px 0;">MeteorSMP is not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
             <p style="margin: 0;">&copy; 2026 MeteorSMP. All rights reserved.</p>
@@ -650,7 +675,7 @@
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Copied to clipboard: ' + text);
-            }).catch(err => {
+            }).catch(() => {
                 alert('Failed to copy to clipboard.');
             });
         }
@@ -691,7 +716,7 @@
             navigator.clipboard.writeText(instructions).then(() => {
                 alert('Copied instructions to clipboard!\nRun in-game at meteorsmp.abrdns.com:\n\n/redeem ' + currentCode + '\n/pay server ' + currentPrice);
                 closeModal();
-            }).catch(err => {
+            }).catch(() => {
                 alert('Run /redeem ' + currentCode + ' and /pay server ' + currentPrice + ' in-game at meteorsmp.abrdns.com');
                 closeModal();
             });
