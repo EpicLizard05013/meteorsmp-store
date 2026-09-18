@@ -192,7 +192,7 @@
             display: inline-block;
             text-align: center;
         }
-        .btn:hover { background: #6d28d9; transform: translateY(-1px); }
+        .btn:hover:not(:disabled) { background: #6d28d9; transform: translateY(-1px); }
         .badge {
             position: absolute;
             top: -10px;
@@ -556,19 +556,51 @@
         <div class="grid">
             <div class="card">
                 <div>
-                    <h2 style="color: #ef4444;">INFERNO</h2>
+                    <h2 style="color: #ef4444;">Inferno</h2>
                     <ul>
                         <li>Owners always tpa you (if not busy)</li>
                         <li>5 Homes</li>
                         <li>30 Player Vaults (/PV)</li>
-                        <li>[INFERNO] Prefix</li>
+                        <li>[Inferno] Prefix</li>
                         <li><code>/kit inferno</code></li>
                         <li>Free 10M upon every join per day</li>
                     </ul>
                 </div>
                 <div class="price-row">
-                    <span class="price">Custom</span>
-                    <button class="btn" onclick="openCheckout('INFERNO Rank', 'Custom', 'INFERNO')">Buy Now</button>
+                    <span class="price" style="color: #a1a1aa; font-size: 1rem;">Coming soon</span>
+                    <button class="btn" style="background: #3f3f46; cursor: not-allowed;" disabled>Buy Now</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #dc2626;">Inferno+</h2>
+                    <ul>
+                        <li>All Inferno perks</li>
+                        <li>8 Homes</li>
+                        <li>40 Player Vaults (/PV)</li>
+                        <li>[Inferno+] Prefix</li>
+                        <li><code>/kit inferno+</code></li>
+                    </ul>
+                </div>
+                <div class="price-row">
+                    <span class="price" style="color: #a1a1aa; font-size: 1rem;">Coming soon</span>
+                    <button class="btn" style="background: #3f3f46; cursor: not-allowed;" disabled>Buy Now</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="color: #991b1b;">Inferno++</h2>
+                    <ul>
+                        <li>All Inferno+ perks</li>
+                        <li>12 Homes</li>
+                        <li>50 Player Vaults (/PV)</li>
+                        <li>[Inferno++] Prefix</li>
+                        <li><code>/kit inferno++</code></li>
+                    </ul>
+                </div>
+                <div class="price-row">
+                    <span class="price" style="color: #a1a1aa; font-size: 1rem;">Coming soon</span>
+                    <button class="btn" style="background: #3f3f46; cursor: not-allowed;" disabled>Buy Now</button>
                 </div>
             </div>
             <div class="card">
@@ -932,7 +964,6 @@
         let currentCode = '';
         let currentPrice = '';
 
-        // Secure Random Code Generator to stop spamming duplicate code formats
         function generateSecureRandomCode(prefix) {
             const array = new Uint8Array(8);
             window.crypto.getRandomValues(array);
@@ -966,7 +997,6 @@
             document.getElementById('modalItemName').textContent = name;
             document.getElementById('modalPrice').textContent = price;
             
-            // Generate single-use randomized code per checkout request
             currentCode = generateSecureRandomCode(prefix);
             currentPrice = price.toLowerCase();
             
